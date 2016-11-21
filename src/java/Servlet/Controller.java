@@ -43,6 +43,23 @@ public class Controller extends HttpServlet {
             out.println("<h1>Servlet Controller at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
+            
+            String forwardToJsp = "";
+            String action = request.getParameter("action");
+            
+            if(action!=null){
+                switch(action){
+                    case "login_form":
+                        forwardToJsp = "login.jsp";
+                        break;
+                       
+                    case "login":
+                        
+                        break;
+                }
+            }else{
+                
+            }
         }
     }
 

@@ -1,0 +1,48 @@
+/* 
+    Created on : 21-Nov-2016, 20:10:04
+    Author     : Conno
+*/
+
+
+@keyframes desktopBackgroundChange 
+{
+    0%{background: url("../image/animation/background_image_1.jpg");background-repeat: no-repeat;background-size: 100%;background-position: center;}
+    20%{background: url("../image/animation/background_image_2.jpg");background-repeat: no-repeat;background-size: 100%;background-position: center;}
+    40%{background: url("../image/animation/background_image_3.jpg");background-repeat: no-repeat;background-size: 100%;background-position: center;}
+    60%{background: url("../image/animation/background_image_4.jpg");background-repeat: no-repeat;background-size: 100%;background-position: center;}
+    80%{background: url("../image/animation/background_image_5.jpg");background-repeat: no-repeat;background-size: 100%;background-position: center;}
+    100%{background: url("../image/animation/background_image_1.jpg");background-repeat: no-repeat;background-size: 100%;background-position: center;}
+}
+
+@-webkit-keyframes desktopBackgroundChange 
+{
+    0%{background: url("../image/animation/background_image_1.jpg");background-repeat: no-repeat;background-size: 100%;background-position: center;}
+    20%{background: url("../image/animation/background_image_2.jpg");background-repeat: no-repeat;background-size: 100%;background-position: center;}
+    40%{background: url("../image/animation/background_image_3.jpg");background-repeat: no-repeat;background-size: 100%;background-position: center;}
+    60%{background: url("../image/animation/background_image_4.jpg");background-repeat: no-repeat;background-size: 100%;background-position: center;}
+    80%{background: url("../image/animation/background_image_5.jpg");background-repeat: no-repeat;background-size: 100%;background-position: center;}
+    100%{background: url("../image/animation/background_image_1.jpg");background-repeat: no-repeat;background-size: 100%;background-position: center;}
+
+}
+
+@-moz-keyframes desktopBackgroundChange 
+{
+    0%{background: url("../image/animation/background_image_1.jpg");background-repeat: no-repeat;background-size: 100%;background-position: center;}
+    20%{background: url("../image/animation/background_image_2.jpg");background-repeat: no-repeat;background-size: 100%;background-position: center;}
+    40%{background: url("../image/animation/background_image_3.jpg");background-repeat: no-repeat;background-size: 100%;background-position: center;}
+    60%{background: url("../image/animation/background_image_4.jpg");background-repeat: no-repeat;background-size: 100%;background-position: center;}
+    80%{background: url("../image/animation/background_image_5.jpg");background-repeat: no-repeat;background-size: 100%;background-position: center;}
+    100%{background: url("../image/animation/background_image_1.jpg");background-repeat: no-repeat;background-size: 100%;background-position: center;}
+}
+
+@-o-keyframes desktopBackgroundChange 
+{
+    0%{background: url("../image/animation/background_image_1.jpg");background-repeat: no-repeat;background-size: 100%;background-position: center;}
+    20%{background: url("../image/animation/background_image_2.jpg");background-repeat: no-repeat;background-size: 100%;background-position: center;}
+    40%{background: url("../image/animation/background_image_3.jpg");background-repeat: no-repeat;background-size: 100%;background-position: center;}
+    60%{background: url("../image/animation/background_image_4.jpg");background-repeat: no-repeat;background-size: 100%;background-position: center;}
+    80%{background: url("../image/animation/background_image_5.jpg");background-repeat: no-repeat;background-size: 100%;background-position: center;}
+    100%{background: url("../image/animation/background_image_1.jpg");background-repeat: no-repeat;background-size: 100%;background-position: center;}
+}
+
+

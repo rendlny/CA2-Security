@@ -5,3 +5,4 @@
 .checkstyle
 /nbproject/private/
 /build/
+/dist/

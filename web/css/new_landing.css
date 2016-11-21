@@ -1,0 +1,93 @@
+/* 
+    Created on : 21-Nov-2016, 20:06:01
+    Author     : Conno
+*/
+
+@import url("animation.css");
+
+header 
+{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background-position: center top;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    /*Animation */
+    animation-name: desktopBackgroundChange;
+    animation-duration: 20s;
+    animation-iteration-count: infinite; 
+    /*Webkit Animation */
+    -webkit-animation-name: desktopBackgroundChange;
+    -webkit-animation-duration: 20s;
+    -webkit-animation-iteration-count: infinite; 
+    /*Moz Animation */
+    -moz-animation-name: desktopBackgroundChange;
+    -moz-animation-duration: 20s;
+    -moz-animation-iteration-count: infinite; 
+    /*o Animation */
+    -o-animation-name: desktopBackgroundChange;
+    -o-animation-duration: 20s;
+    -o-animation-iteration-count: infinite; 
+}
+
+header div 
+{
+    background-color: rgba(0, 0, 0, 0.7);
+    background: -webkit-linear-gradient(rgba(13, 13, 13, 0.7), rgba(13, 13, 13, 1)); 
+    width: 100%;
+    height: 100%;
+}
+
+header div img 
+{
+    width: 200px;
+    padding-top: 10%;
+}
+
+header div h1 
+{
+    padding: 1% 40% 0% 40%;
+}
+
+header div hr 
+{
+    width: 25%;
+    margin: 1% 0% 0% 37.5%;
+    border-color: #55AB48;
+}
+
+header div p 
+{
+    color: #55AB48;
+    font-size: 1.25em;
+    margin-top: 2.5%;
+}
+
+header div form 
+{
+    margin-top: 5%;
+    margin-right: 2.5%;
+}
+
+.button {
+	width: 10%;
+	color: #55AB48;
+	background-color: rgba(0,0,0,0);
+	border-color: #55AB48;
+	border: solid;
+	border-radius: 25px;
+	padding: 0.5%;
+	margin-left: 2.5%;
+	font-family: 'Roboto', sans-serif;
+	font-size: 1.2em;
+	font-style: bold;
+	outline: none;
+}
+
+.button:hover {
+	color: rgba(0,0,0,0.8);
+	background-color: #0A9153;
+	border-color: #0A9153;
+	font-weight: bold;
+}

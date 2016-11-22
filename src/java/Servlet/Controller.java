@@ -29,16 +29,19 @@ public class Controller extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+            
+            response.setContentType("text/html;charset=UTF-8");
         
             
             String forwardToJsp = "";
             String action = request.getParameter("action");
             
-            if(action!=null){
-                switch(action){
+            if(action == null){
+                action = "home";
+            }
+            
+            switch(action){
                     case "login_form":
                         forwardToJsp = "login.jsp";
                         break;
@@ -46,10 +49,8 @@ public class Controller extends HttpServlet {
                     case "login":
                         
                         break;
-                }
-            }else{
-                
             }
+            
         
     }
 

@@ -6,6 +6,7 @@
 package Servlet;
 
 import Commands.UserLoginCommand;
+import Commands.UserSignUpCommand;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -43,14 +44,21 @@ public class Controller extends HttpServlet {
             }
             
             switch(action){
-                    case "login_form":
-                        forwardToJsp = "login.jsp";
-                        break;
-                       
-                    case "login":
-                        UserLoginCommand command = new UserLoginCommand();
-                        forwardToJsp = command.execute(request, response);
-                        break;
+                case "Home":
+                    forwardToJsp = "index.html";
+                    break;
+
+                case "Login":
+                    forwardToJsp = "login.jsp";
+                    break;
+                
+                case "Sign Up":
+                    forwardToJsp = "sign_up.jsp";
+                    break;
+                case "create_user":
+                    UserSignUpCommand command = new UserSignUpCommand();
+                    forwardToJsp = command.execute(request, response);
+                    break;
             }
             
         

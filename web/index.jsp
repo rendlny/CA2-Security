@@ -1,17 +1,13 @@
+<%-- 
+    Document   : index
+    Created on : 23-Nov-2016, 11:50:33
+    Author     : Conno
+--%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
-        <title>Buddy Buddwick Public Library</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" type="image/png" href="image/favicon.ico"/>
-        <link href="css/common.css" rel="stylesheet" type="text/css">
-        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+        <jsp:include page="head.jsp"/>
         <link href="css/new_landing.css" rel="stylesheet" type="text/css">
     </head>
     <body>

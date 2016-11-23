@@ -5,6 +5,7 @@
  */
 package Servlet;
 
+import Commands.UserLoginCommand;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -47,7 +48,8 @@ public class Controller extends HttpServlet {
                         break;
                        
                     case "login":
-                        
+                        UserLoginCommand command = new UserLoginCommand();
+                        forwardToJsp = command.execute(request, response);
                         break;
             }
             

@@ -18,3 +18,57 @@ h1 {
 	color: #55AB48;
 	font-size: 2.5em;
 }
+
+.error_container {
+    border: 1px solid red;
+    width: 90%;
+    margin: 2% 2.5% 0% 2.5%;
+    padding: 2%;
+    border-radius: 15px;
+    text-align: center;
+    background: repeating-linear-gradient(
+        45deg,
+        #ff3333,
+        #ff3333 10px,
+        #ff6666 10px,
+        #ff6666 20px
+      );
+}
+
+/* nav.css */
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #4CAF50;
+	position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+li {
+    float: left;
+}
+
+nav a li  {
+    display: block;
+    color: #0d0d0d;
+    text-align: center;
+    padding: 15px 16px;
+    text-decoration: none;
+}
+
+nav a li:hover {
+    background-color: #0d0d0d;
+	color: #4CAF50;
+}
+
+.active {
+    background-color: #0d0d0d;
+	color: #4CAF50;
+}
+
+.right {
+    float: right;
+}

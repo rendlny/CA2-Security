@@ -36,7 +36,7 @@ public class UserLoginCommand implements Command {
                 User temp_user = userDao.login(username, password);
                 if(temp_user != null) {
                     session.setAttribute("logged_in", temp_user);
-                    forwardToJsp = "home.jsp";
+                    forwardToJsp = "Controller?action=Home";
                 } else {
                     forwardToJsp = "login.jsp?error=1";
                 }

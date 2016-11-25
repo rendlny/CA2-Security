@@ -1,0 +1,64 @@
+/* 
+    Created on : 25-Nov-2016, 19:27:41
+    Author     : Conno
+*/
+
+section {
+    width: 100%;
+    min-height: 700px;
+    max-width: 960px;
+    min-width: 500px;
+    margin: 6% auto;
+    width: 60%;
+    background-color: #1a1a1a;
+    padding: 1%;
+    box-shadow:1px 1px 5px rgba(0,0,0,0.7);
+}
+
+h1 {
+	margin: 1% 0 1% 0;
+}
+
+hr {
+	border-color: #4CAF50;
+}
+
+table {
+    border: 1px solid #55AB48;
+    border-collapse: collapse;
+    width: 80%;
+    margin: 2.5% auto;
+}
+
+tr {
+    border-bottom: 1px solid #55AB48;
+}
+
+th, td {
+    padding: 0.75%;
+}
+
+th {
+    background-color: #55AB48;
+}
+
+td {
+    color: white;
+}
+
+th:first-child {
+    text-align: left;
+}
+
+td:not(:first-child) {
+    text-align: center;
+}
+
+a {
+    color: #55AB48;
+    text-decoration: none;
+}
+
+p {
+    color: whitesmoke;
+}

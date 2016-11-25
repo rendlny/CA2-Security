@@ -1,0 +1,123 @@
+/* 
+    Created on : 23-Nov-2016, 17:35:27
+    Author     : Conno
+*/
+
+/*Account Login and Sign Up CSS*/
+
+@import url("nav.css");
+
+body {
+	overflow: hidden;
+}
+
+section {
+    width: 100%;
+    max-width: 960px;
+    min-width: 500px;
+    margin: 6% auto;
+    width: 30%;
+    background-color: #1a1a1a;
+    box-shadow:1px 1px 5px rgba(0,0,0,0.7);
+}
+
+h1 {
+	padding: 2.5% 0 2.5% 2.5%;	
+}
+
+hr {
+	width: 90%;
+	margin: 0% 0% 0% 5%;
+	border-color: #55AB48;
+}
+
+form {
+	margin: 2.5% 0 0 5%;
+	color: #55AB48;
+}
+
+.button {
+	width: 30%;
+	margin-left: 11%;
+	color: #55AB48;
+	border: none;
+	border-bottom: solid #55AB48 3px;
+	border-radius: inherit;
+	padding: 1%;
+}
+
+.button:hover {
+    color: rgba(0,0,0,0.8);
+    background-color: #0A9153;
+    border-color: #0A9153;
+    font-weight: bold;
+}
+
+input {
+	font-size: 1.2em;
+	padding: 0.5%;
+	margin-bottom: 2.5%;
+	background-color: #1a1a1a;
+	border: none;
+	border-bottom: solid #55AB48 1px;
+	color: #55AB48;
+}
+
+input:focus {
+	border-bottom: solid #0A9153 3px;
+	outline: none;
+}
+
+input:hover {
+	border-bottom: solid #0A9153 3px;
+}
+
+.text_input {
+	width: 70%;
+}
+
+.name_input {
+	width: 34.5%;
+}
+
+select {
+	font-size: 1.2em;
+	padding: 0.5%;
+	margin-bottom: 2.5%;
+	background-color: #1a1a1a;
+	border: none;
+	border-bottom: solid #55AB48 1px;
+	color: #55AB48;
+	width: 34.5%;
+	outline: none;
+}
+
+select:invalid {
+	color: #999;
+}
+
+option {
+	color: #55AB48;
+}
+option:checked{
+	box-shadow: 0 0 10px 100px #55AB48 inset;
+}
+
+footer {
+	padding: 15% 0 5% 0;
+	color: #55AB48;
+}
+
+footer p {
+	margin: 1.5% 0 0 5%;
+}
+
+.disabled {
+	color: #4d4d4d;
+	border-color: #4d4d4d;
+}
+
+.disabled:hover {
+	background-color: #4d4d4d;
+	border-color: #4d4d4d;
+}

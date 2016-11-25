@@ -5,6 +5,7 @@
  */
 package Servlet;
 
+import Commands.TitleListCommand;
 import Commands.UserLoginCommand;
 import Commands.UserSignUpCommand;
 import java.io.IOException;
@@ -56,9 +57,14 @@ public class Controller extends HttpServlet {
                 case "create_user":
                     UserSignUpCommand signup_command = new UserSignUpCommand();
                     forwardToJsp = signup_command.execute(request, response);
-                    
                     break;
+                    
                 case "Home":
+                    TitleListCommand list_command = new TitleListCommand();
+                    forwardToJsp = list_command.execute(request, response);
+                    break;
+                case "check_out":
+                    System.out.println(request.getAttribute("title_id"));
                     break;
                 default:
                     forwardToJsp = "index.jsp";

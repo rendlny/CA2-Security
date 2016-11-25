@@ -8,20 +8,32 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <jsp:include page="head.jsp"/>        
+        <link href="css/account.css" rel="stylesheet" type="text/css">
     </head>
+    <jsp:include page="account_nav.jsp"/>
     <body>
-        <a href="index.jsp">Back to index</a>
-        <h1>Login</h1>
-        <form action="Controller" method="POST">
-            <label for="username">Username: </label>
-            <input name="username" size="25" type="text"/><br /><br />
-            <label for="password">Password: </label>
-            <input name="password" size="25" type="password"/><br /><br />
+        <section>
+            <h1>Login</h1>
+            <hr/>
+
+            <jsp:include page="login_error.jsp"/>
             
-            <input type="submit" value="Login" />
-            <input type="hidden" name ="action" value="login" />
-        </form>
+            <form method="post" action="Controller">
+
+                <input type="hidden" name="action" value="login_user"/>
+
+                <label for="username">Username:</label><br/>
+                <input class="text_input" type="text" name="username" placeholder="Username" required/><br/>
+
+                <label for="pass">Password:</label></br>
+                <input class="text_input" type="password" name="pass" placeholder="Password" required/></br>
+
+                <br/><br/>
+                <input class="button" type="submit" name="submit" value="Login"/>
+                <input class="button" type="reset" name="reset" value="Clear"/>
+                <br/><br/>
+            </form>
+        </section>
     </body>
 </html>

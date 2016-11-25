@@ -34,34 +34,39 @@ public class Controller extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
             
             response.setContentType("text/html;charset=UTF-8");
-        
-            
-            String forwardToJsp = "";
-            String action = request.getParameter("action");
-            
-            if(action == null){
-                action = "home";
-            }
-            
-            switch(action){
-                case "Home":
-                    forwardToJsp = "index.html";
-                    break;
 
+
+        String forwardToJsp = null;
+        String action = request.getParameter("action");
+
+        switch(action){
                 case "Login":
                     forwardToJsp = "login.jsp";
                     break;
-                
+                    
+                case "login_user":
+                    UserLoginCommand login_command = new UserLoginCommand();
+                    forwardToJsp = login_command.execute(request, response);
+                    break;
+                    
                 case "Sign Up":
                     forwardToJsp = "sign_up.jsp";
                     break;
+                    
                 case "create_user":
-                    UserSignUpCommand command = new UserSignUpCommand();
-                    forwardToJsp = command.execute(request, response);
+                    UserSignUpCommand signup_command = new UserSignUpCommand();
+                    forwardToJsp = signup_command.execute(request, response);
+                    
                     break;
-            }
+                case "Home":
+                    break;
+                default:
+                    forwardToJsp = "index.jsp";
+                    break;
+        }
             
-        
+        response.sendRedirect(forwardToJsp);
+          
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

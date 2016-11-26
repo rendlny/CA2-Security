@@ -89,8 +89,17 @@ public class Controller extends HttpServlet {
                         UserLoanCommand userLoan_command = new UserLoanCommand();
                         forwardToJsp = userLoan_command.execute(request, response);
                     } else {
-                        session.setAttribute("error", "You have to be logged in to use this functionalit. "
+                        session.setAttribute("error", "You have to be logged in to use this functionality. "
                                 + "Please try again");
+                        forwardToJsp = "login.jsp";
+                    }
+                    break;
+                    
+                case "profile":
+                    if(session.getAttribute("logged_in") != null) {
+                        forwardToJsp = "profile.jsp";
+                    } else {
+                        session.setAttribute("error", "You have to be logged in to use this functionality.");
                         forwardToJsp = "login.jsp";
                     }
                     break;

@@ -1,0 +1,68 @@
+/* 
+    Created on : 26-Nov-2016, 21:16:14
+    Author     : Conno
+*/
+
+section {
+    width: 100%;
+    min-height: 700px;
+    max-width: 960px;
+    min-width: 500px;
+    margin: 6% auto;
+    width: 60%;
+    background-color: #1a1a1a;
+    padding: 1%;
+    box-shadow:1px 1px 5px rgba(0,0,0,0.7);
+}
+
+h1 {
+	margin: 1% 0 1% 0;
+}
+
+hr {
+    border-color: #55AB48;
+}
+
+form {
+    width: 90%;
+    margin: 2.5% auto;
+    color: #55AB48;
+}
+
+.text_input {
+    width: 65%;
+    font-size: 1.2em;
+    padding: 0.5%;
+    background-color: #1a1a1a;
+    border: none;
+    border-bottom: solid #55AB48 1px;
+    color: #55AB48;
+}
+
+.text_input:focus {
+    border-bottom: solid #0A9153 3px;
+    outline: none;
+}
+
+.text_input:hover {
+    border-bottom: solid #0A9153 3px;
+}
+
+label {
+    font-size: 1.2em;
+}
+
+.button {
+    width: 25%;
+    background-color: #55AB48;
+    color: #1a1a1a;
+    padding: 0.5%;
+    border: 1px #55AB48 solid;
+    font-size: 1.2em;
+    border-radius: 5px;
+}
+
+.button:hover {
+    background-color: #0A9153;
+    border: 1px #0A9153 solid;
+}

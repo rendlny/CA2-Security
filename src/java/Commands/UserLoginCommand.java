@@ -38,13 +38,16 @@ public class UserLoginCommand implements Command {
                     session.setAttribute("logged_in", temp_user);
                     forwardToJsp = "Controller?action=Home";
                 } else {
-                    forwardToJsp = "login.jsp?error=1";
+                    session.setAttribute("error", "No user with matching credentials. Please try again");
+                    forwardToJsp = "login.jsp";
                 }
             } else {
-                forwardToJsp = "login.jsp?error=2";
+                session.setAttribute("error", "Missing input data please try again");
+                forwardToJsp = "login.jsp";
             }
         } else {
-            forwardToJsp = "home.jsp?error=1";
+            session.setAttribute("error", "You are already logged in. Please log out first");
+            forwardToJsp = "home.jsp";
         }
         
         return forwardToJsp;

@@ -72,3 +72,15 @@ nav a li:hover {
 .right {
     float: right;
 }
+
+.good {
+    color: green;
+} 
+
+.moderate {
+    color: yellow;
+}
+
+.late {
+    color: red;
+}

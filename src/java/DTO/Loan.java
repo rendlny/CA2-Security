@@ -5,6 +5,14 @@
  */
 package DTO;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Conno
@@ -81,6 +89,34 @@ public class Loan {
     public void setIs_returned(boolean is_returned) {
         this.is_returned = is_returned;
     }
+    
+    public String calcStatus() {
+        
+        String status = null;
+        
+        try {
+            Date start_date = new SimpleDateFormat("yyyy-MM-dd").parse(Loan.getCurrentDate());
+            Date end_date = new SimpleDateFormat("yyyy-MM-dd").parse(return_by_date);
+            
+            long diff = end_date.getTime() - start_date.getTime();
+            long days = diff / (24 * 60 * 60 * 1000);
+
+            System.out.println(days);
+
+            if(days > 4) {
+                status = "Good, " + days + " days remianing";
+            } else if(days <= 4 && days > 0) {
+                status = "Moderate, " + days + " days remianing";
+            } else {
+                status = "Late, 0 days remianing";
+            }
+            
+        } catch (ParseException ex) {
+            System.out.println("Unable to parse dates " + ex.getMessage());
+        }
+        
+        return status;
+    }
 
     @Override
     public int hashCode() {
@@ -113,5 +149,20 @@ public class Loan {
                     + ", user_id=" + user_id + ", withdraw_date=" + withdraw_date 
                     + ", return_by_date=" + return_by_date 
                     + ", is_returned=" + is_returned + '}';
+    }
+    
+    public static String getCurrentDate() {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar cal = Calendar.getInstance();
+
+        return dateFormat.format(cal.getTime());
+    }
+    
+    public static String calcReturnDate() {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DAY_OF_YEAR, 7);
+        
+        return dateFormat.format(cal.getTime());
     }
 }

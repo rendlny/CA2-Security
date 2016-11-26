@@ -5,7 +5,9 @@
  */
 package Servlet;
 
+import Commands.TitleCheckOutCommand;
 import Commands.TitleListCommand;
+import Commands.UserLoanCommand;
 import Commands.UserLoginCommand;
 import Commands.UserSignUpCommand;
 import java.io.IOException;
@@ -15,6 +17,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -34,9 +37,10 @@ public class Controller extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
             
-            response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
 
-
+        HttpSession session = request.getSession();
+        session.setAttribute("error", null);
         String forwardToJsp = null;
         String action = request.getParameter("action");
 
@@ -51,7 +55,12 @@ public class Controller extends HttpServlet {
                     break;
                     
                 case "Sign Up":
-                    forwardToJsp = "sign_up.jsp";
+                    if(session.getAttribute("logged_in") == null) {
+                        forwardToJsp = "sign_up.jsp";
+                    } else {
+                        session.setAttribute("error", "You are already logged in. Please sing out first.");
+                        forwardToJsp = "home.jsp";
+                    }
                     break;
                     
                 case "create_user":
@@ -60,12 +69,37 @@ public class Controller extends HttpServlet {
                     break;
                     
                 case "Home":
-                    TitleListCommand list_command = new TitleListCommand();
-                    forwardToJsp = list_command.execute(request, response);
+                    if(session.getAttribute("logged_in") != null) {
+                        TitleListCommand list_command = new TitleListCommand();
+                        forwardToJsp = list_command.execute(request, response);
+                    } else {
+                        session.setAttribute("error", "You have to be logged in to use this functionalit. "
+                                + "Please try again");
+                        forwardToJsp = "login.jsp";
+                    }
                     break;
+                    
                 case "check_out":
-                    System.out.println(request.getAttribute("title_id"));
+                    TitleCheckOutCommand checkOut_command = new TitleCheckOutCommand();
+                    forwardToJsp = checkOut_command.execute(request, response);
                     break;
+                    
+                case "user_loans":
+                    if(session.getAttribute("logged_in") != null) {
+                        UserLoanCommand userLoan_command = new UserLoanCommand();
+                        forwardToJsp = userLoan_command.execute(request, response);
+                    } else {
+                        session.setAttribute("error", "You have to be logged in to use this functionalit. "
+                                + "Please try again");
+                        forwardToJsp = "login.jsp";
+                    }
+                    break;
+                    
+                case "logout":
+                    session.setAttribute("logged_in", null);
+                    forwardToJsp = "login.jsp";
+                    break;
+                    
                 default:
                     forwardToJsp = "index.jsp";
                     break;

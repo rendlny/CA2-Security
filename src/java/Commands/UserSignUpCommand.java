@@ -67,17 +67,21 @@ public class UserSignUpCommand implements Command {
                     if(userDao.addUser(newUser)) {
                         forwardToJsp = "login.jsp";
                     } else {
-                        forwardToJsp = "sign_up.jsp?error=3";
+                        session.setAttribute("error", "An unkown error occured. Please wait while we try to fix this");
+                        forwardToJsp = "sign_up.jsp";
                     }
-                } else {
-                    forwardToJsp = "sign_up.jsp?error=2";
+                } else { 
+                    session.setAttribute("error", "Username or email already in use. Please choose another");
+                    forwardToJsp = "sign_up.jsp";
                 }
 
             } else {
-                forwardToJsp = "sign_up.jsp?error=1";
+                session.setAttribute("error", "Missing input data. Please try again");
+                forwardToJsp = "sign_up.jsp";
             }
         } else {
-            forwardToJsp = "home.jsp?error=1";
+            session.setAttribute("error", "You are already logged in. Please log out first");
+            forwardToJsp = "home.jsp";
         }
         
         return forwardToJsp;

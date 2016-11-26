@@ -195,7 +195,7 @@ public class User {
     }
     
     public static String getCurrentDate() {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Calendar cal = Calendar.getInstance();
 
         return dateFormat.format(cal.getTime());

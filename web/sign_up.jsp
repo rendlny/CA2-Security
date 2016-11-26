@@ -17,7 +17,7 @@
             <h1>Sign Up</h1>
             <hr/>
             
-            <jsp:include page="signup_error.jsp"/>
+            <jsp:include page="error.jsp"/>
             
             <form method="post" action="Controller">
                 <input type="hidden" name="action" value="create_user"/>

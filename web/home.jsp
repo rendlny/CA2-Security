@@ -14,13 +14,33 @@
         <jsp:include page="head.jsp"/>
         <link href="css/home.css" rel="stylesheet" type="text/css">
         <% 
-            User user = (User)session.getAttribute("logged_in");
+            User user = null;
+            
+            if(session.getAttribute("logged_in") == null) {
+                session.setAttribute("error", "You have been logged out, Please log in to contune");
+                response.sendRedirect("login");
+            } else {
+                user = (User)session.getAttribute("logged_in");
+            }
         %>
     </head>
     <body>
+        
+        <% 
+            String nav_type = null;
+            
+            if(user.isIs_admin()) {
+                nav_type = "admin_nav.jsp";
+            } else {
+                nav_type = "home_nav.jsp";
+            }
+        %>
+        
+        <jsp:include page="<%=nav_type%>"/>
         <section>
             <h1>Welcome <%=user.getUsername() %></h1>
             <hr/>
+            <jsp:include page="error.jsp"/>
             <form method="post" action="Controller">
                 <input type = "hidden" name = "action" value = "check_out"/>
                 <table>
@@ -50,7 +70,7 @@
                         }
                     %>
                 </table>
-            </from>
+            </form>
         </section>
     </body>
 </html>

@@ -17,7 +17,7 @@
             <h1>Login</h1>
             <hr/>
 
-            <jsp:include page="login_error.jsp"/>
+            <jsp:include page="error.jsp"/>
             
             <form method="post" action="Controller">
 

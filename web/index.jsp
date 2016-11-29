@@ -17,9 +17,9 @@
                 <h1>Buddwick Public Library</h1>
                 <hr/>
                 <p>Find fascinating ways to waste your time</p>
-                <form name="page_select" method="post" action="Controller">
-                    <input class="button" type="submit" name="action" value="Login"/>
-                    <input class="button" type="submit" name="action" value="Sign Up"/>
+                <form name="page_select">
+                    <a href="login.jsp" class="button" name="loginButton">Login</a>
+                    <a href="sign_up.jsp" class="button" name="signUpButton">Sign Up</a>
                 </form>
             </div>
         </header>

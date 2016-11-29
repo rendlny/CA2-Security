@@ -11,17 +11,13 @@
 <!DOCTYPE html>
 <html>
     <head>
+        
+        <jsp:include page="logged_in_check.jsp"/>
+        
         <jsp:include page="head.jsp"/>
         <link href="css/home.css" rel="stylesheet" type="text/css">
         <% 
-            User user = null;
-            
-            if(session.getAttribute("logged_in") == null) {
-                session.setAttribute("error", "You have been logged out, Please log in to contune");
-                response.sendRedirect("login");
-            } else {
-                user = (User)session.getAttribute("logged_in");
-            }
+            User user = (User)session.getAttribute("logged_in");
         %>
     </head>
     <body>

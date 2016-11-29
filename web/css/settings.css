@@ -60,6 +60,7 @@ label {
     border: 1px #55AB48 solid;
     font-size: 1.2em;
     border-radius: 5px;
+    margin: 2% 0% 0% 0%;
 }
 
 .button:hover {

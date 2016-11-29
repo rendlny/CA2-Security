@@ -11,10 +11,10 @@
 <div id="bar">
     <nav>
         <ul>
-            <a href='Home.jsp'><li>Home</li></a>
+            <a href='home.jsp'><li>Home</li></a>
             <a href='Controller?action=user_loans'><li>My Loans</li></a>
             <a href='Controller?action=search'><li>Search</li></a>
-            <a class='right' href='Controller?action=logout'><li>Logout</li></a>
+            <a class='right' href='logout.jsp'><li>Logout</li></a>
             <a class='right' href='profile.jsp'><li><%=username%></li></a>
         </ul>
     </nav>

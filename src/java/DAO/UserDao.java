@@ -392,4 +392,45 @@ public class UserDao extends Dao implements UserDaoInterface {
         }
         return users;
     }
+
+    @Override
+    public boolean updatePassword(String username, String oldPass, String newPass) {
+        boolean updated = false;
+        
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try{
+            con = getConnection();
+
+            String query = "UPDATE user SET pass = ? FROM user WHERE username = ? and password = ?";
+            ps = con.prepareStatement(query);
+            ps.setString(1, newPass);
+            ps.setString(2, username);
+            ps.setString(3, oldPass);
+            rs = ps.executeQuery(); 
+            
+            if(!rs.next()){
+                updated=true;
+            }
+            
+        }catch (SQLException e) {
+            System.out.println("Exception occured in the updatePassword() method: " + e.getMessage());
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    freeConnection(con);
+                }
+            } catch (SQLException e) {
+                System.out.println("Exception occured in the finally section of the updatePassword() method: " + e.getMessage());
+            }
+        }
+        return updated;
+    }
 }

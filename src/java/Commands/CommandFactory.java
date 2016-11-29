@@ -12,16 +12,19 @@ package Commands;
 public class CommandFactory {
     public Command createCommand(String action){
         Command command = null;
-        if((action.toLowerCase()).equals("login_user")){
+        action = action.toLowerCase();
+        if(action.equals("login_user")){
             command =  new UserLoginCommand();
-        }else if((action.toLowerCase()).equals("create_user")){
+        }else if(action.equals("create_user")){
             command =  new UserSignUpCommand();
-        }else if((action.toLowerCase()).equals("home")){
+        }else if(action.equals("home")){
             command =  new TitleListCommand();
-        }else if((action.toLowerCase()).equals("check_out")){
+        }else if(action.equals("check_out")){
             command = new TitleCheckOutCommand();
-        }else if((action.toLowerCase()).equals("user_loans")){
+        }else if(action.equals("user_loans")){
             command =  new UserLoanCommand();
+        }else if(action.equals("update password")){
+            command =  new UserUpdatePasswordCommand();
         }
         return command;
     }

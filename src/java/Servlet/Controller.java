@@ -5,6 +5,8 @@
  */
 package Servlet;
 
+import Commands.Command;
+import Commands.CommandFactory;
 import Commands.TitleCheckOutCommand;
 import Commands.TitleListCommand;
 import Commands.UserLoanCommand;
@@ -44,74 +46,13 @@ public class Controller extends HttpServlet {
         String forwardToJsp = null;
         String action = request.getParameter("action");
 
-        switch(action){
-                case "Login":
-                    forwardToJsp = "login.jsp";
-                    break;
-                    
-                case "login_user":
-                    UserLoginCommand login_command = new UserLoginCommand();
-                    forwardToJsp = login_command.execute(request, response);
-                    break;
-                    
-                case "Sign Up":
-                    if(session.getAttribute("logged_in") == null) {
-                        forwardToJsp = "sign_up.jsp";
-                    } else {
-                        session.setAttribute("error", "You are already logged in. Please sing out first.");
-                        forwardToJsp = "home.jsp";
-                    }
-                    break;
-                    
-                case "create_user":
-                    UserSignUpCommand signup_command = new UserSignUpCommand();
-                    forwardToJsp = signup_command.execute(request, response);
-                    break;
-                    
-                case "Home":
-                    if(session.getAttribute("logged_in") != null) {
-                        TitleListCommand list_command = new TitleListCommand();
-                        forwardToJsp = list_command.execute(request, response);
-                    } else {
-                        session.setAttribute("error", "You have to be logged in to use this functionalit. "
-                                + "Please try again");
-                        forwardToJsp = "login.jsp";
-                    }
-                    break;
-                    
-                case "check_out":
-                    TitleCheckOutCommand checkOut_command = new TitleCheckOutCommand();
-                    forwardToJsp = checkOut_command.execute(request, response);
-                    break;
-                    
-                case "user_loans":
-                    if(session.getAttribute("logged_in") != null) {
-                        UserLoanCommand userLoan_command = new UserLoanCommand();
-                        forwardToJsp = userLoan_command.execute(request, response);
-                    } else {
-                        session.setAttribute("error", "You have to be logged in to use this functionality. "
-                                + "Please try again");
-                        forwardToJsp = "login.jsp";
-                    }
-                    break;
-                    
-                case "profile":
-                    if(session.getAttribute("logged_in") != null) {
-                        forwardToJsp = "profile.jsp";
-                    } else {
-                        session.setAttribute("error", "You have to be logged in to use this functionality.");
-                        forwardToJsp = "login.jsp";
-                    }
-                    break;
-                    
-                case "logout":
-                    session.setAttribute("logged_in", null);
-                    forwardToJsp = "login.jsp";
-                    break;
-                    
-                default:
-                    forwardToJsp = "index.jsp";
-                    break;
+        CommandFactory factory = new CommandFactory();
+        Command command = factory.createCommand(action);
+        if(command == null){
+            session.setAttribute("error", "ERROR - No command set, contact administrator");
+            forwardToJsp = "error.jsp";
+        }else{
+            forwardToJsp = command.execute(request, response);
         }
             
         response.sendRedirect(forwardToJsp);

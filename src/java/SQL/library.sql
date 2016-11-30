@@ -73,6 +73,18 @@ CREATE TABLE `user` (
   `is_admin` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Permissions`
+--
+DROP TABLE IF EXISTS `permissions`
+CREATE TABLE `permissions` (
+	`role_type` tinyint(1) NOT NULL,
+	`permission` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
 --
 -- Indexes for dumped tables
 --
@@ -99,6 +111,12 @@ ALTER TABLE `user`
   ADD PRIMARY KEY (`user_id`),
   ADD UNIQUE KEY `username_uq` (`username`),
   ADD UNIQUE KEY `email_uq` (`email`);
+  
+--
+-- Indexes for table `permissions`
+--
+ALTER TABLE `permissions`
+  ADD PRIMARY KEY (`role_type`, `permission`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -119,6 +137,7 @@ ALTER TABLE `title`
 --
 ALTER TABLE `user`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
+  
 --
 -- Constraints for dumped tables
 --

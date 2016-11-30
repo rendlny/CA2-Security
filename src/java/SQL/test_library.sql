@@ -107,6 +107,39 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`user_id`, `username`, `email`, `pass`, `salt`, `f_name`, `l_name`, `last_password_change`, `is_admin`) VALUES
 (8, 'admin', 'admin@library.com', 'L7q9PMoQ/iSd0XXVv3rX829CyMSS9Ha4rkrVuwnvQZ0=', '9J6kIsveP+qFZ/c+dn+/sByb4dWd3deO/4Ac9gSFZk8=', 'admin', 'admin', '2016-11-01', 0);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `permissions`
+--
+DROP TABLE IF EXISTS `permissions`
+CREATE TABLE `permissions` (
+	`role_type` tinyint(1) NOT NULL,
+	`permission` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `permissions`
+--
+INSERT INTO `permissions` (`role_type`, `permission`) VALUES
+(1,'sign_up'),
+(1,'login'),
+(1,'view_titles'),
+(1,'view_current_loan'),
+(1,'add_loan'),
+(1,'return_loan'),
+(0,'sign_up'),
+(0,'login'),
+(0,'view_titles'),
+(0,'view_current_loan'),
+(0,'add_loan'),
+(0,'return_loan'),
+(0,'add_title'),
+(0,'edit_title'),
+(0,'add_remove_copy'),
+(0,'delete_title'),
+(0,'delete_user');
+
 --
 -- Indexes for dumped tables
 --
@@ -134,6 +167,13 @@ ALTER TABLE `user`
   ADD UNIQUE KEY `username_uq` (`username`),
   ADD UNIQUE KEY `email_uq` (`email`);
 
+--
+-- Indexes for table `permissions`
+--
+ALTER TABLE `permissions`
+  ADD PRIMARY KEY (`role_type`, `permission`);
+  
+  
 --
 -- AUTO_INCREMENT for dumped tables
 --

@@ -30,11 +30,11 @@
         <section>
             <h1>Settings</h1>
             <jsp:include page="error.jsp"/>
-
+            <jsp:include page="notify.jsp"/>
             <hr/>
             <form method="post" action="Controller">
 
-                <input type = "hidden" value = "update_email" />
+                <input type = "hidden" name="action" value = "update_email" />
 
                 <label for="email">Email:</label><br/>
                 <input class="text_input" type="email" name="email" placeholder="You@Awesome.com" value="<%= user.getEmail()%>" required/>

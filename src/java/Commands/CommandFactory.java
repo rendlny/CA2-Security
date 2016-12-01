@@ -25,6 +25,8 @@ public class CommandFactory {
             command =  new UserLoanCommand();
         }else if(action.equals("update_password")){
             command =  new UserUpdatePasswordCommand();
+        }else if(action.equals("update_email")){
+            command =  new UserUpdateEmailCommand();
         }
         return command;
     }

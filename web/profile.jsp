@@ -12,15 +12,15 @@
         <jsp:include page="logged_in_check.jsp"/>
         <jsp:include page="head.jsp"/>
         <link href="css/settings.css" rel="stylesheet" type="text/css">
-        <% 
-            User user = (User)session.getAttribute("logged_in");
+        <%
+            User user = (User) session.getAttribute("logged_in");
         %>
     </head>
     <body>
-        <% 
+        <%
             String nav_type = null;
-            
-            if(user.isIs_admin()) {
+
+            if (user.isIs_admin()) {
                 nav_type = "admin_nav.jsp";
             } else {
                 nav_type = "home_nav.jsp";
@@ -29,21 +29,23 @@
         <jsp:include page="<%=nav_type%>"/>
         <section>
             <h1>Settings</h1>
+            <jsp:include page="error.jsp"/>
+
             <hr/>
             <form method="post" action="Controller">
-                
+
                 <input type = "hidden" value = "update_email" />
-                
+
                 <label for="email">Email:</label><br/>
-                <input class="text_input" type="email" name="email" placeholder="You@Awesome.com" value="<%= user.getEmail() %>" required/>
-                
+                <input class="text_input" type="email" name="email" placeholder="You@Awesome.com" value="<%= user.getEmail()%>" required/>
+
                 <input class="button" type="submit" name="submit" value="Update Email" />
             </form>
-            
+
             <form method="post" action="Controller">
-                
-                <input type = "hidden" value = "update_password" />
-                
+
+                <input type = "hidden" name= "action" value = "update_password" />
+
                 <label for="old_pass">Password:</label><br/>
                 <input class="text_input" type="password" name="old_pass" placeholder="Old password"/><br/>
                 <input class="text_input" type="password" name="new_pass" placeholder="New password"/><br/>

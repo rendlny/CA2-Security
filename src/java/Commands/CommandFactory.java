@@ -23,7 +23,7 @@ public class CommandFactory {
             command = new TitleCheckOutCommand();
         }else if(action.equals("user_loans")){
             command =  new UserLoanCommand();
-        }else if(action.equals("update password")){
+        }else if(action.equals("update_password")){
             command =  new UserUpdatePasswordCommand();
         }
         return command;

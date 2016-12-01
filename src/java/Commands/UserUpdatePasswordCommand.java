@@ -5,18 +5,92 @@
  */
 package Commands;
 
+import DAO.UserDao;
+import DTO.User;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Conno
+ * @author Ren
  */
 public class UserUpdatePasswordCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        HttpSession session = request.getSession();
+        String forwardToJsp = null;
+        UserDao userDao = new UserDao("library");
+
+        User logged_in = (User) session.getAttribute("logged_in");
+        if (logged_in != null) {
+            //getting logged in users original password
+            String oldPass = logged_in.getPassword();
+            String salt = logged_in.getSalt();
+
+            //setting up parameters
+            User tempU = new User();
+            String tryPass = null;
+            String newPass = null;
+            String matchNewPass = null;
+
+            //getting parameters from form
+            tryPass = request.getParameter("old_pass");
+            newPass = request.getParameter("new_pass");
+            matchNewPass = request.getParameter("conf_pass");
+
+            if (tryPass == null || newPass == null || matchNewPass == null || 
+                tryPass.equals("") || newPass.equals("") || matchNewPass.equals("")) {
+                session.setAttribute("error", "Please fill in the 3 boxes");
+                forwardToJsp = "profile.jsp";
+            } else if (!newPass.equals(matchNewPass)) {
+                session.setAttribute("error", "New passwords do not match");
+                forwardToJsp = "profile.jsp";
+            } else {
+                String username = logged_in.getUsername();
+
+                String saltedTryPass = tempU.generateSaltedHash(tryPass, salt);
+                
+                if (saltedTryPass.equals(oldPass)) {
+                    String newSalt = null;
+                    String newSaltedPass = null;
+                    
+                    //Checking Salt is unique
+                    boolean check = false;
+                    do {
+                        check = false;
+
+                        newSalt = tempU.generateSalt();
+
+                        if(userDao.checkSalt(newSalt)) {
+                           newSaltedPass = tempU.generateSaltedHash(newPass, newSalt);
+                        } else {
+                            check = true;
+                        }
+
+                    } while(check);
+                    
+                    boolean updateCheck = userDao.updatePassword(username, oldPass, newSaltedPass, newSalt);
+                    if(updateCheck == true){
+                        session.setAttribute("error", "Password Updated");
+                        forwardToJsp = "profile.jsp";
+                    }else{
+                        session.setAttribute("error", "Password Update Failed");
+                        forwardToJsp = "profile.jsp";
+                    }
+
+                } else {
+                    session.setAttribute("error", "The Old password is incorrect");
+                    forwardToJsp = "profile.jsp";
+                }
+            }
+        } else {
+            session.setAttribute("error", "You have to be logged in to use this functionality");
+            forwardToJsp = "login.jsp";
+        }
+
+        return forwardToJsp;
     }
-    
+
 }

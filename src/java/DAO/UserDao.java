@@ -394,23 +394,24 @@ public class UserDao extends Dao implements UserDaoInterface {
     }
 
     @Override
-    public boolean updatePassword(String username, String oldPass, String newPass) {
+    public boolean updatePassword(String username, String oldPass, String newPass, String salt) {
         boolean updated = false;
         
         Connection con = null;
         PreparedStatement ps = null;
-        ResultSet rs = null;
+        int affectedRows = 0;
         try{
             con = getConnection();
 
-            String query = "UPDATE user SET pass = ? FROM user WHERE username = ? and password = ?";
+            String query = "UPDATE user SET pass = ?, salt = ? WHERE username = ? and pass = ?";
             ps = con.prepareStatement(query);
             ps.setString(1, newPass);
-            ps.setString(2, username);
-            ps.setString(3, oldPass);
-            rs = ps.executeQuery(); 
+            ps.setString(2, salt);
+            ps.setString(3, username);
+            ps.setString(4, oldPass);
+            affectedRows = ps.executeUpdate(); 
             
-            if(!rs.next()){
+            if(affectedRows!=0){
                 updated=true;
             }
             
@@ -418,9 +419,6 @@ public class UserDao extends Dao implements UserDaoInterface {
             System.out.println("Exception occured in the updatePassword() method: " + e.getMessage());
         } finally {
             try {
-                if (rs != null) {
-                    rs.close();
-                }
                 if (ps != null) {
                     ps.close();
                 }

@@ -51,45 +51,54 @@ public class UserUpdatePasswordCommand implements Command {
                 session.setAttribute("error", "New passwords do not match");
                 forwardToJsp = "profile.jsp";
             } else {
+
                 String username = logged_in.getUsername();
 
-                String saltedTryPass = tempU.generateSaltedHash(tryPass, salt);
+                //checking password
+                String valid = this.passwordChecker(newPass, username);
+                if (!valid.equals("true")) {
+                    session.setAttribute("error", valid + ", Your pass = " + newPass);
+                    forwardToJsp = "profile.jsp";
+                } else {
 
-                if (saltedTryPass.equals(oldPass)) {
-                    String newSalt = null;
-                    String newSaltedPass = null;
+                    String saltedTryPass = tempU.generateSaltedHash(tryPass, salt);
 
-                    //Checking Salt is unique
-                    boolean check = false;
-                    do {
-                        check = false;
+                    if (saltedTryPass.equals(oldPass)) {
+                        String newSalt = null;
+                        String newSaltedPass = null;
 
-                        newSalt = tempU.generateSalt();
+                        //Checking Salt is unique
+                        boolean check = false;
+                        do {
+                            check = false;
 
-                        if (userDao.checkSalt(newSalt)) {
-                            newSaltedPass = tempU.generateSaltedHash(newPass, newSalt);
+                            newSalt = tempU.generateSalt();
+
+                            if (userDao.checkSalt(newSalt)) {
+                                newSaltedPass = tempU.generateSaltedHash(newPass, newSalt);
+                            } else {
+                                check = true;
+                            }
+
+                        } while (check);
+
+                        DateFormat df = new SimpleDateFormat("yy/MM/dd");
+                        Date dateobj = new Date();
+                        String date = df.format(dateobj);
+
+                        boolean updateCheck = userDao.updatePassword(username, oldPass, newSaltedPass, newSalt, date);
+                        if (updateCheck == true) {
+                            session.setAttribute("notify", "Password Updated");
+                            forwardToJsp = "profile.jsp";
                         } else {
-                            check = true;
+                            session.setAttribute("error", "Password Update Failed");
+                            forwardToJsp = "profile.jsp";
                         }
 
-                    } while (check);
-
-                    DateFormat df = new SimpleDateFormat("yy/MM/dd");
-                    Date dateobj = new Date();
-                    String date = df.format(dateobj);
-
-                    boolean updateCheck = userDao.updatePassword(username, oldPass, newSaltedPass, newSalt, date);
-                    if (updateCheck == true) {
-                        session.setAttribute("notify", "Password Updated");
-                        forwardToJsp = "profile.jsp";
                     } else {
-                        session.setAttribute("error", "Password Update Failed");
+                        session.setAttribute("error", "The Old password is incorrect");
                         forwardToJsp = "profile.jsp";
                     }
-
-                } else {
-                    session.setAttribute("error", "The Old password is incorrect");
-                    forwardToJsp = "profile.jsp";
                 }
             }
         } else {
@@ -98,6 +107,43 @@ public class UserUpdatePasswordCommand implements Command {
         }
 
         return forwardToJsp;
+    }
+
+    public String passwordChecker(String pass, String username) {
+        String valid = null;
+
+        //checking length is within limits and does not contain they're username
+        if (pass.length() >= 9 && pass.length() <= 20) {
+            //check it contains a number, uppercase + lowercase letter and a non
+            if (!pass.contains(username)) {
+
+                //alphabetic character
+                boolean numCheck = false;
+                boolean upperCheck = false;
+                boolean lowerCheck = false;
+                boolean charCheck = false;
+
+                String pattern = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[~|-@#$%^&+=]).{9,20}";
+                boolean checkPass = pass.matches(pattern);
+                if(checkPass == false){
+                    valid = "Password does not meet the requirements \n "
+                            + "Password must contain at least one "
+                            + "-UPPERCASE letter "
+                            + "-lowercase letter "
+                            + "-number "
+                            + "-special character e.g.(*[~|-@#$%^&+=])";
+                }else{
+                    valid = "true";
+                }
+            } else {
+                valid = "Password must not contain you're username";
+
+            }
+        } else {
+            valid = "Password must be between 9 to 20 characters long";
+        }
+
+        return valid;
     }
 
 }

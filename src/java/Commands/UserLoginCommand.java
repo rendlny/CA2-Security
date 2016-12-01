@@ -36,6 +36,13 @@ public class UserLoginCommand implements Command {
                 User temp_user = userDao.login(username, password);
                 if(temp_user != null) {
                     session.setAttribute("logged_in", temp_user);
+                    
+                    //checking if password needs to be updated
+                    //int days = (new java.util.Date()).getTime() - (temp_user.getDate()).getTime();
+                    //if(days>90){
+                    //    session.setAttribute("notify", "You're password is out "
+                    //            + "of date, please change it via your profile");
+                    //}
                     forwardToJsp = "Controller?action=Home";
                 } else {
                     session.setAttribute("error", "No user with matching credentials. Please try again");

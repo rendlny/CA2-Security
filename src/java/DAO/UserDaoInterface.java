@@ -18,6 +18,6 @@ public interface UserDaoInterface {
     public boolean checkSalt(String salt);
     public ArrayList<User> searchUsers(String name);
     public ArrayList<User> searchUsersLike(String name);
-    public boolean updatePassword(String username, String oldPass, String newPass, String salt);
+    public boolean updatePassword(String username, String oldPass, String newPass, String salt, String date);
     public boolean updateEmail(String username, String newEmail);
 }

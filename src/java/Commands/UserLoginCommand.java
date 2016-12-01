@@ -7,6 +7,9 @@ package Commands;
 
 import DAO.UserDao;
 import DTO.User;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -19,30 +22,46 @@ public class UserLoginCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        
+
         HttpSession session = request.getSession();
         String forwardToJsp = null;
-        
-        if(session.getAttribute("logged_in") == null) {
+
+        if (session.getAttribute("logged_in") == null) {
 
             String username = request.getParameter("username");
             String password = request.getParameter("pass");
 
-            if((username != null && !username.equals("")) &&
-               (password != null && !password.equals(""))
-            ) {
+            if ((username != null && !username.equals(""))
+                    && (password != null && !password.equals(""))) {
 
                 UserDao userDao = new UserDao("library");
                 User temp_user = userDao.login(username, password);
-                if(temp_user != null) {
+                if (temp_user != null) {
                     session.setAttribute("logged_in", temp_user);
-                    
+
                     //checking if password needs to be updated
-                    //int days = (new java.util.Date()).getTime() - (temp_user.getDate()).getTime();
-                    //if(days>90){
-                    //    session.setAttribute("notify", "You're password is out "
-                    //            + "of date, please change it via your profile");
-                    //}
+                    String lastChangedDate = temp_user.getDate();
+                    String[] parts = lastChangedDate.split("-");
+                    int year = Integer.parseInt(parts[0]);
+                    int month = Integer.parseInt(parts[1]);
+                    int day = Integer.parseInt(parts[2]);
+
+                    Calendar oldDate = Calendar.getInstance();
+                    oldDate.set(Calendar.YEAR, year);
+                    oldDate.set(Calendar.MONTH, month);
+                    oldDate.set(Calendar.DAY_OF_MONTH, day);
+                    Date theOldDate = oldDate.getTime();
+
+                    Calendar currentDate = Calendar.getInstance();
+                    Date theCurrDate = new Date();
+                    
+                    long diff = theCurrDate.getTime() - theOldDate.getTime();
+                    long days = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+                    
+                    if (days > 90) {
+                        session.setAttribute("notify", "You're password is out "
+                                + "of date, please change it via your profile" + " DAYS = " + days);
+                    }
                     forwardToJsp = "Controller?action=Home";
                 } else {
                     session.setAttribute("error", "No user with matching credentials. Please try again");
@@ -56,8 +75,8 @@ public class UserLoginCommand implements Command {
             session.setAttribute("error", "You are already logged in. Please log out first");
             forwardToJsp = "home.jsp";
         }
-        
+
         return forwardToJsp;
     }
-    
+
 }

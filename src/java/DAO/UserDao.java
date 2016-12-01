@@ -395,7 +395,7 @@ public class UserDao extends Dao implements UserDaoInterface {
     }
 
     @Override
-    public boolean updatePassword(String username, String oldPass, String newPass, String salt) {
+    public boolean updatePassword(String username, String oldPass, String newPass, String salt, String date) {
         boolean updated = false;
 
         Connection con = null;
@@ -404,12 +404,13 @@ public class UserDao extends Dao implements UserDaoInterface {
         try {
             con = getConnection();
 
-            String query = "UPDATE user SET pass = ?, salt = ? WHERE username = ? and pass = ?";
+            String query = "UPDATE user SET pass = ?, salt = ?, last_password_change = ?  WHERE username = ? and pass = ?";
             ps = con.prepareStatement(query);
             ps.setString(1, newPass);
             ps.setString(2, salt);
-            ps.setString(3, username);
-            ps.setString(4, oldPass);
+            ps.setString(3, date);
+            ps.setString(4, username);
+            ps.setString(5, oldPass);
             affectedRows = ps.executeUpdate();
 
             if (affectedRows != 0) {

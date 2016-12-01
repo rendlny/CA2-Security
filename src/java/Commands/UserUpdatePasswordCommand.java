@@ -7,6 +7,9 @@ package Commands;
 
 import DAO.UserDao;
 import DTO.User;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -40,8 +43,8 @@ public class UserUpdatePasswordCommand implements Command {
             newPass = request.getParameter("new_pass");
             matchNewPass = request.getParameter("conf_pass");
 
-            if (tryPass == null || newPass == null || matchNewPass == null || 
-                tryPass.equals("") || newPass.equals("") || matchNewPass.equals("")) {
+            if (tryPass == null || newPass == null || matchNewPass == null
+                    || tryPass.equals("") || newPass.equals("") || matchNewPass.equals("")) {
                 session.setAttribute("error", "Please fill in the 3 boxes");
                 forwardToJsp = "profile.jsp";
             } else if (!newPass.equals(matchNewPass)) {
@@ -51,11 +54,11 @@ public class UserUpdatePasswordCommand implements Command {
                 String username = logged_in.getUsername();
 
                 String saltedTryPass = tempU.generateSaltedHash(tryPass, salt);
-                
+
                 if (saltedTryPass.equals(oldPass)) {
                     String newSalt = null;
                     String newSaltedPass = null;
-                    
+
                     //Checking Salt is unique
                     boolean check = false;
                     do {
@@ -63,19 +66,23 @@ public class UserUpdatePasswordCommand implements Command {
 
                         newSalt = tempU.generateSalt();
 
-                        if(userDao.checkSalt(newSalt)) {
-                           newSaltedPass = tempU.generateSaltedHash(newPass, newSalt);
+                        if (userDao.checkSalt(newSalt)) {
+                            newSaltedPass = tempU.generateSaltedHash(newPass, newSalt);
                         } else {
                             check = true;
                         }
 
-                    } while(check);
-                    
-                    boolean updateCheck = userDao.updatePassword(username, oldPass, newSaltedPass, newSalt);
-                    if(updateCheck == true){
+                    } while (check);
+
+                    DateFormat df = new SimpleDateFormat("yy/MM/dd");
+                    Date dateobj = new Date();
+                    String date = df.format(dateobj);
+
+                    boolean updateCheck = userDao.updatePassword(username, oldPass, newSaltedPass, newSalt, date);
+                    if (updateCheck == true) {
                         session.setAttribute("notify", "Password Updated");
                         forwardToJsp = "profile.jsp";
-                    }else{
+                    } else {
                         session.setAttribute("error", "Password Update Failed");
                         forwardToJsp = "profile.jsp";
                     }

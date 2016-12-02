@@ -54,15 +54,17 @@ public class UserLoginCommand implements Command {
 
                     Calendar currentDate = Calendar.getInstance();
                     Date theCurrDate = new Date();
-                    
+
                     long diff = theCurrDate.getTime() - theOldDate.getTime();
                     long days = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
-                    
+
                     if (days > 90) {
                         session.setAttribute("notify", "You're password is out "
-                                + "of date, please change it via your profile" + " DAYS = " + days);
+                                + "of date, you must change it");
+                        forwardToJsp = "profile.jsp";
+                    } else {
+                        forwardToJsp = "Controller?action=Home";
                     }
-                    forwardToJsp = "Controller?action=Home";
                 } else {
                     session.setAttribute("error", "No user with matching credentials. Please try again");
                     forwardToJsp = "login.jsp";

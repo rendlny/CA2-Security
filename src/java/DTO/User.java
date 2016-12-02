@@ -21,7 +21,7 @@ import javax.crypto.spec.PBEKeySpec;
  * @author Conno
  */
 public class User {
-    
+
     private final int user_id;
     private String username;
     private String email;
@@ -31,7 +31,7 @@ public class User {
     private String l_name;
     private String date;
     private boolean is_admin;
-    
+
     public User() {
         user_id = -1;
         username = null;
@@ -44,9 +44,8 @@ public class User {
         is_admin = false;
     }
 
-    public User(int user_id, String username, String email, String password, 
-            String salt, String f_name, String l_name, String date, boolean is_admin) 
-    {
+    public User(int user_id, String username, String email, String password,
+            String salt, String f_name, String l_name, String date, boolean is_admin) {
         this.user_id = user_id;
         this.username = username;
         this.email = email;
@@ -153,34 +152,34 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + "user_id=" + user_id + ", username=" + username 
-                       + ", email=" + email + ", password=" + password 
-                       + ", salt=" + salt + ", f_name=" + f_name 
-                       + ", l_name=" + l_name + ", date=" + date 
-                       + ", is_admin=" + is_admin + '}';
+        return "User{" + "user_id=" + user_id + ", username=" + username
+                + ", email=" + email + ", password=" + password
+                + ", salt=" + salt + ", f_name=" + f_name
+                + ", l_name=" + l_name + ", date=" + date
+                + ", is_admin=" + is_admin + '}';
     }
-    
+
     public static String generateSalt() {
-        
+
         //Create SecureRandom and Base64Encoder objects
         SecureRandom secRand = new SecureRandom();
         Base64.Encoder enc = Base64.getEncoder();
-        
+
         //Create salt array to house the bytes
         byte[] salt = new byte[32];
-        
+
         //Generate bytes
         secRand.nextBytes(salt);
-        
+
         //Return salt as string
         return enc.encodeToString(salt);
     }
-    
+
     public static String generateSaltedHash(String password, String salt) {
-        
+
         Base64.Encoder enc = Base64.getEncoder();
         byte[] hash = null;
-        KeySpec spec = new PBEKeySpec(password.toCharArray(), 
+        KeySpec spec = new PBEKeySpec(password.toCharArray(),
                 salt.getBytes(), 65563, 256);
         try {
             SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA512");
@@ -190,15 +189,51 @@ public class User {
         } catch (InvalidKeySpecException ex) {
             System.out.println("Key spec chosen is invalid");
         }
-        
+
         return enc.encodeToString(hash);
     }
-    
+
     public static String getCurrentDate() {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Calendar cal = Calendar.getInstance();
 
         return dateFormat.format(cal.getTime());
     }
-    
+
+    public String passwordChecker(String pass, String username) {
+        String valid = null;
+
+        //checking length is within limits and does not contain they're username
+        if (pass.length() >= 9 && pass.length() <= 20) {
+            //check it contains a number, uppercase + lowercase letter and a non
+            if (!pass.contains(username)) {
+
+                //alphabetic character
+                boolean numCheck = false;
+                boolean upperCheck = false;
+                boolean lowerCheck = false;
+                boolean charCheck = false;
+
+                String pattern = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[~|-@#$%^&+=]).{9,20}";
+                boolean checkPass = pass.matches(pattern);
+                if (checkPass == false) {
+                    valid = "Password does not meet the requirements \n "
+                            + "Password must contain at least one "
+                            + "-UPPERCASE letter "
+                            + "-lowercase letter "
+                            + "-number "
+                            + "-special character e.g.(*[~|-@#$%^&+=])";
+                } else {
+                    valid = "true";
+                }
+            } else {
+                valid = "Password must not contain you're username";
+
+            }
+        } else {
+            valid = "Password must be between 9 to 20 characters long";
+        }
+
+        return valid;
+    }
 }

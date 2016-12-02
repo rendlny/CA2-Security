@@ -59,9 +59,12 @@ public class UserLoginCommand implements Command {
                     long days = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
 
                     if (days > 90) {
+                        session.setAttribute("username", temp_user.getUsername());
+                        session.setAttribute("logged_in", null);
+                        session.setAttribute("temp_user", temp_user);
                         session.setAttribute("notify", "You're password is out "
                                 + "of date, you must change it");
-                        forwardToJsp = "profile.jsp";
+                        forwardToJsp = "force_password_change.jsp";
                     } else {
                         forwardToJsp = "Controller?action=Home";
                     }

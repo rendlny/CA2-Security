@@ -27,6 +27,8 @@ public class CommandFactory {
             command =  new UserUpdatePasswordCommand();
         }else if(action.equals("update_email")){
             command =  new UserUpdateEmailCommand();
+        }else if(action.equals("force_update_password")){
+            command =  new UserForceUpdatePasswordCommand();
         }
         return command;
     }

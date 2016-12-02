@@ -214,7 +214,7 @@ public class User {
                 boolean lowerCheck = false;
                 boolean charCheck = false;
 
-                String pattern = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[~|-@#$%^&+=]).{9,20}";
+                String pattern = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).{9,20}";
                 boolean checkPass = pass.matches(pattern);
                 if (checkPass == false) {
                     valid = "Password does not meet the requirements \n "

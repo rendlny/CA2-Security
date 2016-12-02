@@ -18,19 +18,20 @@ import javax.servlet.http.HttpSession;
  *
  * @author Ren
  */
-public class UserUpdatePasswordCommand implements Command {
-
-    @Override
+public class UserForceUpdatePasswordCommand implements Command {
+     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         String forwardToJsp = null;
         UserDao userDao = new UserDao("library");
 
-        User logged_in = (User) session.getAttribute("logged_in");
-        if (logged_in != null) {
+        User tempUser =(User)session.getAttribute("temp_user");
+        String uName = session.getAttribute("username") + "";
+        tempUser.setUsername(uName);
+        if (tempUser != null) {
             //getting logged in users original password
-            String oldPass = logged_in.getPassword();
-            String salt = logged_in.getSalt();
+            String oldPass = tempUser.getPassword();
+            String salt = tempUser.getSalt();
 
             //setting up parameters
             User tempU = new User();
@@ -46,19 +47,19 @@ public class UserUpdatePasswordCommand implements Command {
             if (tryPass == null || newPass == null || matchNewPass == null
                     || tryPass.equals("") || newPass.equals("") || matchNewPass.equals("")) {
                 session.setAttribute("error", "Please fill in the 3 boxes");
-                forwardToJsp = "profile.jsp";
+                forwardToJsp = "force_password_change.jsp";
             } else if (!newPass.equals(matchNewPass)) {
                 session.setAttribute("error", "New passwords do not match");
-                forwardToJsp = "profile.jsp";
+                forwardToJsp = "force_password_change.jsp";
             } else {
 
-                String username = logged_in.getUsername();
+                String username = tempUser.getUsername();
 
                 //checking password
-                String valid = logged_in.passwordChecker(newPass, username);
+                String valid = tempUser.passwordChecker(newPass, username);
                 if (!valid.equals("true")) {
                     session.setAttribute("error", valid);
-                    forwardToJsp = "profile.jsp";
+                    forwardToJsp = "force_password_change.jsp";
                 } else {
 
                     String saltedTryPass = tempU.generateSaltedHash(tryPass, salt);
@@ -88,25 +89,25 @@ public class UserUpdatePasswordCommand implements Command {
 
                         boolean updateCheck = userDao.updatePassword(username, oldPass, newSaltedPass, newSalt, date);
                         if (updateCheck == true) {
+                            
                             session.setAttribute("notify", "Password Updated");
                             forwardToJsp = "profile.jsp";
                         } else {
                             session.setAttribute("error", "Password Update Failed");
-                            forwardToJsp = "profile.jsp";
+                            forwardToJsp = "force_password_change.jsp";
                         }
 
                     } else {
                         session.setAttribute("error", "The Old password is incorrect");
-                        forwardToJsp = "profile.jsp";
+                        forwardToJsp = "force_password_change.jsp";
                     }
                 }
             }
         } else {
-            session.setAttribute("error", "You have to be logged in to use this functionality");
+            session.setAttribute("error", "error");
             forwardToJsp = "login.jsp";
         }
 
         return forwardToJsp;
     }
-
 }

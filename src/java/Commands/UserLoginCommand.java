@@ -62,7 +62,7 @@ public class UserLoginCommand implements Command {
                         session.setAttribute("username", temp_user.getUsername());
                         session.setAttribute("logged_in", null);
                         session.setAttribute("temp_user", temp_user);
-                        session.setAttribute("notify", "You're password is out "
+                        session.setAttribute("error", "You're password is out "
                                 + "of date, you must change it");
                         forwardToJsp = "force_password_change.jsp";
                     } else {

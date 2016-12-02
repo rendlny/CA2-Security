@@ -93,9 +93,8 @@ public class UserForceUpdatePasswordCommand implements Command {
 
                         boolean updateCheck = userDao.updatePassword(username, oldPass, newSaltedPass, newSalt, date);
                         if (updateCheck == true) {
-                            
                             session.setAttribute("notify", "Password Updated");
-                            forwardToJsp = "profile.jsp";
+                            forwardToJsp = "Controller?action=login_user";
                         } else {
                             session.setAttribute("error", "Password Update Failed");
                             forwardToJsp = "force_password_change.jsp";

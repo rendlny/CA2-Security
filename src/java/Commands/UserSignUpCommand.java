@@ -47,40 +47,47 @@ public class UserSignUpCommand implements Command {
                     newUser.setUsername(username);
                     newUser.setEmail(email);
 
-                    //checking passwords
-                    String valid = newUser.passwordChecker(password, username);
-                    if (!password.equals(conf_password)) {
-                        session.setAttribute("error", "Passwords do not match");
+                    boolean emailValid = newUser.validateEmail(email);
+                    if (emailValid == false) {
+                        session.setAttribute("error", "Invalid email");
                         forwardToJsp = "sign_up.jsp";
                     } else {
-                        if (!valid.equals("true")) {
-                            session.setAttribute("error", valid);
+
+                        //checking passwords
+                        String valid = newUser.passwordChecker(password, username);
+                        if (!password.equals(conf_password)) {
+                            session.setAttribute("error", "Passwords do not match");
                             forwardToJsp = "sign_up.jsp";
                         } else {
-
-                            boolean check = false;
-
-                            do {
-                                check = false;
-
-                                String salt = User.generateSalt();
-
-                                if (userDao.checkSalt(salt)) {
-                                    newUser.setSalt(salt);
-                                    newUser.setPassword(User.generateSaltedHash(password, salt));
-                                } else {
-                                    check = true;
-                                }
-
-                            } while (check);
-
-                            newUser.setDate(User.getCurrentDate());
-
-                            if (userDao.addUser(newUser)) {
-                                forwardToJsp = "login.jsp";
-                            } else {
-                                session.setAttribute("error", "An unkown error occured. Please wait while we try to fix this");
+                            if (!valid.equals("true")) {
+                                session.setAttribute("error", valid);
                                 forwardToJsp = "sign_up.jsp";
+                            } else {
+
+                                boolean check = false;
+
+                                do {
+                                    check = false;
+
+                                    String salt = User.generateSalt();
+
+                                    if (userDao.checkSalt(salt)) {
+                                        newUser.setSalt(salt);
+                                        newUser.setPassword(User.generateSaltedHash(password, salt));
+                                    } else {
+                                        check = true;
+                                    }
+
+                                } while (check);
+
+                                newUser.setDate(User.getCurrentDate());
+
+                                if (userDao.addUser(newUser)) {
+                                    forwardToJsp = "login.jsp";
+                                } else {
+                                    session.setAttribute("error", "An unkown error occured. Please wait while we try to fix this");
+                                    forwardToJsp = "sign_up.jsp";
+                                }
                             }
                         }
                     }

@@ -7,8 +7,6 @@ package Commands;
 
 import DAO.UserDao;
 import DTO.User;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -39,7 +37,7 @@ public class UserUpdateEmailCommand implements Command {
                 forwardToJsp = "profile.jsp";
             } else {
                 //checking if email is valid
-                boolean emailValid = validate(newEmail);
+                boolean emailValid = logged_in.validateEmail(newEmail);
                 if (emailValid == false) {
                     session.setAttribute("error", "Invalid email");
                     forwardToJsp = "profile.jsp";
@@ -70,14 +68,5 @@ public class UserUpdateEmailCommand implements Command {
         }
 
         return forwardToJsp;
-    }
-
-    public static final Pattern VALID_EMAIL_ADDRESS_REGEX
-            = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$",
-                    Pattern.CASE_INSENSITIVE);
-
-    public static boolean validate(String emailStr) {
-        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
-        return matcher.find();
     }
 }

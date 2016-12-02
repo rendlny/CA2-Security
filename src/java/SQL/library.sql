@@ -78,7 +78,7 @@ CREATE TABLE `user` (
 --
 -- Table structure for table `Permissions`
 --
-DROP TABLE IF EXISTS `permissions`
+DROP TABLE IF EXISTS `permissions`;
 CREATE TABLE `permissions` (
 	`role_type` tinyint(1) NOT NULL,
 	`permission` varchar(25) NOT NULL

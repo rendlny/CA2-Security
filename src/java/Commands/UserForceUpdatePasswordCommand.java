@@ -51,7 +51,11 @@ public class UserForceUpdatePasswordCommand implements Command {
             } else if (!newPass.equals(matchNewPass)) {
                 session.setAttribute("error", "New passwords do not match");
                 forwardToJsp = "force_password_change.jsp";
-            } else {
+            }else if(tryPass.equals(newPass)){
+                session.setAttribute("error", "New password cannot be the same as your old password");
+                forwardToJsp = "force_password_change.jsp";
+            } 
+            else {
 
                 String username = tempUser.getUsername();
 

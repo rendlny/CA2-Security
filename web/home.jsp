@@ -22,7 +22,7 @@
     </head>
     <body>
         
-        <% 
+        <%
             String nav_type = null;
             
             if(user.isIs_admin()) {

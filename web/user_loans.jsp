@@ -4,6 +4,7 @@
     Author     : Conno
 --%>
 
+<%@page import="DAO.LoanDao"%>
 <%@page import="DAO.TitleDao"%>
 <%@page import="DTO.Loan"%>
 <%@page import="java.util.ArrayList"%>
@@ -16,6 +17,8 @@
         <jsp:include page = "head.jsp"/>
         <link href="css/home.css" rel="stylesheet" type="text/css">
         <% 
+            TitleDao titleDao = new TitleDao("library");
+            LoanDao loanDao = new LoanDao("library");
             User user = (User)session.getAttribute("logged_in");
         %>
     </head>
@@ -46,8 +49,8 @@
                         <th>&nbsp;</th>
                     </tr>
                     <% 
-                        ArrayList<Loan> loans = (ArrayList<Loan>)session.getAttribute("user_loans");
-                        TitleDao titleDao = new TitleDao("library");
+                        ArrayList<Loan> loans = loanDao.listUserLoans(user.getUser_id());
+                        
                         for(Loan l : loans) { 
                     %>
                     <tr>

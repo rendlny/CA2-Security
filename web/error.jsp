@@ -12,5 +12,7 @@
         out.print(error);
         out.print("</p>");
         out.print("</div>");
+        
+        session.setAttribute("error", null);
     }
 %>

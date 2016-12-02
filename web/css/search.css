@@ -1,0 +1,29 @@
+/* 
+    Created on : 02-Dec-2016, 18:39:15
+    Author     : Conno
+*/
+
+input[type=text] {
+    width: 15%;
+    margin-bottom: 2%;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 2px solid #55AB48;
+    font-size: 16px;
+    color: #55AB48;
+    background-color: #1a1a1a;
+    background-image: url('../image/searchicon.png');
+    background-size: 20px;
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+input[type=text]:focus {
+    width: 100%;
+    border-bottom: solid #0A9153 3px;
+    color: #0A9153;
+    outline: none;
+}

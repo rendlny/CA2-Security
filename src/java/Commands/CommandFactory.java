@@ -27,6 +27,8 @@ public class CommandFactory {
             command =  new UserUpdatePasswordCommand();
         }else if(action.equals("update_email")){
             command =  new UserUpdateEmailCommand();
+        } else if(action.equals("title_search")) {
+            command = new TitleSearchCommand();
         }
         return command;
     }

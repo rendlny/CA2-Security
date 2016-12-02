@@ -6,8 +6,8 @@
 <div id="bar">
     <nav>
         <ul>
-            <a class='right' href='Controller?action=Login'><li>Login</li></a>
-            <a class='right' href='Controller?action=Sign Up'><li>Sign Up</li></a>
+            <a class='right' href='login.jsp'><li>Login</li></a>
+            <a class='right' href='sign_up.jsp'><li>Sign Up</li></a>
         </ul>
     </nav>
 </div>

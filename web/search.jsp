@@ -32,11 +32,22 @@
         <jsp:include page="<%=nav_type%>"/>
         <section>
             <form method = "post" action = "Controller">
-                <input type = "hidden" name = "action" value = "title_search"/>
-                <input type="text" name="search" placeholder="Search..">
+                <input type = "text" name = "search" placeholder = "Search..."/>
+                <select name="action" required>
+                    <option value="title_search">Titles</option>
+                </select>
             </form>
             <hr/>
             <jsp:include page="error.jsp"/>
+            
+            <%
+                if(session.getAttribute("found_titles") != null) {
+            %>
+                <jsp:include page="title_search_table.jsp" />
+            <%
+                }
+            %>
+            
         </section>
     </body>
 </html>

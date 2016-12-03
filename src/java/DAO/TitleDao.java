@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
@@ -244,23 +245,23 @@ public class TitleDao extends Dao implements TitleDaoInterface {
         ArrayList<Title> titles = new ArrayList<>();
         
         Connection con = null;
-        PreparedStatement ps = null;
+        Statement s = null;
         ResultSet rs = null;
         try{
             con = getConnection();
 
-            String query = "SELECT * FROM title WHERE book_title = ?";
-            ps = con.prepareStatement(query);
-            ps.setString(1, name);
-            rs = ps.executeQuery(); 
+            String query = "SELECT * FROM title WHERE book_title = '" + name + "'";
+            s  = con.createStatement();
+            rs = s.executeQuery(query);
+            
             while(rs.next()){
                 t = new Title(
-                    rs.getInt("title_id"),
-                    rs.getString("book_title"), 
-                    rs.getString("author"),
-                    rs.getString("publisher"),
-                    rs.getInt("year_published"),
-                    rs.getInt("stock")
+                    rs.getInt(1),
+                    rs.getString(2), 
+                    rs.getString(3),
+                    rs.getString(4),
+                    rs.getInt(5),
+                    rs.getInt(6)
                 );
                 titles.add(t);
             }
@@ -269,11 +270,8 @@ public class TitleDao extends Dao implements TitleDaoInterface {
             System.out.println("Exception occured in the searchByName() method: " + e.getMessage());
         } finally {
             try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (ps != null) {
-                    ps.close();
+                if(s != null) {
+                    s.close();
                 }
                 if (con != null) {
                     freeConnection(con);

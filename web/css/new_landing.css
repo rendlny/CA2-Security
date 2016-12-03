@@ -71,18 +71,19 @@ header div form
 }
 
 .button {
-	width: 10%;
-	color: #55AB48;
-	background-color: rgba(0,0,0,0);
-	border-color: #55AB48;
-	border: solid;
-	border-radius: 25px;
-	padding: 0.5%;
-	margin-left: 2.5%;
-	font-family: 'Roboto', sans-serif;
-	font-size: 1.2em;
-	font-style: bold;
-	outline: none;
+    text-decoration: none;
+    width: 10%;
+    color: #55AB48;
+    background-color: rgba(0,0,0,0);
+    border-color: #55AB48;
+    border: solid;
+    border-radius: 25px;
+    padding: 0.5% 3% 0.5% 3%;
+    margin-left: 2.5%;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2em;
+    font-style: bold;
+    outline: none;
 }
 
 .button:hover {

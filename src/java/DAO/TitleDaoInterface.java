@@ -6,6 +6,7 @@
 package DAO;
 
 import DTO.Title;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 
 /**

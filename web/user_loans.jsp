@@ -73,7 +73,7 @@
                         %>
                         
                         <td class="<%=class_type%>"><%=status%></td>
-                        <td><button name="loan_id" value="<%= l.getLoan_id() %>">Return</button></td>
+                        <td><button class="check_button" name="loan_id" value="<%= l.getLoan_id() %>">Return</button></td>
                     </tr>
                     <%
                         }

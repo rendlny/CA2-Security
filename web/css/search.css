@@ -3,12 +3,17 @@
     Author     : Conno
 */
 
+form{
+    width: 100%;
+    margin: 0 auto;
+}
+
 input[type=text] {
-    width: 15%;
-    margin-bottom: 2%;
+    width: 80%;
+    margin: 0% 0% 2% 0%;
     box-sizing: border-box;
-    border: none;
-    border-bottom: 2px solid #55AB48;
+    border: 2px solid #55AB48;
+    border-radius: 4px 0px 0px 4px;
     font-size: 16px;
     color: #55AB48;
     background-color: #1a1a1a;
@@ -17,13 +22,39 @@ input[type=text] {
     background-position: 10px 10px; 
     background-repeat: no-repeat;
     padding: 12px 20px 12px 40px;
-    -webkit-transition: width 0.4s ease-in-out;
-    transition: width 0.4s ease-in-out;
 }
 
 input[type=text]:focus {
-    width: 100%;
-    border-bottom: solid #0A9153 3px;
+    border: solid #0A9153 2px;
     color: #0A9153;
     outline: none;
+}
+
+select {
+    width: 19%;
+    margin: 0% 0% 2% 0%;
+    box-sizing: border-box;
+    border: 2px solid #55AB48;
+    border-radius: 0px 4px 4px 0px;
+    font-size: 16px;
+    color: #1a1a1a;
+    font-weight: bold;
+    background-color: #55AB48;
+    padding: 11px 20px 12px 10px;
+}
+
+select:focus {
+    border: solid #0A9153 2px;
+    background-color: #0A9153;
+    outline: none;
+}
+
+h2 {
+   margin: 2% 0% 2% 0%; 
+   color: #55AB48;
+}
+
+p {
+    width: 75%;
+    margin: 0 auto;
 }

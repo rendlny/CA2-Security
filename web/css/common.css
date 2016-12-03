@@ -41,7 +41,7 @@ nav ul {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #4CAF50;
+    background-color: #55AB48;
 	position: fixed;
     top: 0;
     width: 100%;
@@ -61,12 +61,12 @@ nav a li  {
 
 nav a li:hover {
     background-color: #0d0d0d;
-	color: #4CAF50;
+	color: #55AB48;
 }
 
 .active {
     background-color: #0d0d0d;
-	color: #4CAF50;
+	color: #55AB48;
 }
 
 .right {
@@ -83,4 +83,17 @@ nav a li:hover {
 
 .late {
     color: red;
+}
+
+.check_button {
+    border: none;
+    background-color: #55AB48;
+    color: #1a1a1a;
+    padding: 3%;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+.check_button:hover {
+    background-color: #0A9153;
 }

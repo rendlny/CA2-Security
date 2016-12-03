@@ -60,7 +60,11 @@
                         <td><%=t.getPublisher()%></td>
                         <td><%=t.getYear()%></td>
                         <td><%=t.getStock()%></td>
-                        <td><button name="title_id" value="<%=t.getTitle_id()%>">Check Out</button></td>
+                        <td>
+                            <button class="check_button" name="title_id" value="<%=t.getTitle_id()%>">
+                                Check Out
+                            </button>
+                        </td>
                     </tr>
                     <% 
                         }

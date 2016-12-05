@@ -39,7 +39,7 @@
             <hr/>
             <jsp:include page="error.jsp"/>
             <form method="post" action="Controller">
-                <input type = "hidden" name = "action" value = "return_book"/>
+                <input type = "hidden" name = "action" value = "return_title"/>
                 <table>
                     <tr>
                         <th>Book Title</th>

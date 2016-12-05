@@ -12,5 +12,7 @@
         out.print(notify);
         out.print("</p>");
         out.print("</div>");
+        
+        session.setAttribute("notify", null);
     }
 %>

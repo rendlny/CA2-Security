@@ -30,7 +30,7 @@ public class TitleReturnCommand implements Command {
 
                 boolean returned = loanDao.returnBook(id);
                 if (returned == true) {
-                    session.setAttribute("notify", "");
+                    session.setAttribute("notify", "Book successfully returned");
                     forwardToJsp = "user_loans.jsp";
                 } else {
                     session.setAttribute("error", "Could not return book, contact admin");

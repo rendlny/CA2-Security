@@ -35,6 +35,16 @@ h1 {
       );
 }
 
+.notify_container {
+    border: 1px solid yellowgreen;
+    width: 90%;
+    margin: 2% 2.5% 0% 2.5%;
+    padding: 2%;
+    border-radius: 15px;
+    text-align: center;
+    background: #1A1A1A;
+}
+
 /* nav.css */
 nav ul {
     list-style-type: none;

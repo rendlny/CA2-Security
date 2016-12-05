@@ -50,4 +50,6 @@
     <p>There was no results found</p>
 <% 
     }
+
+    session.setAttribute("found_titles", null);
 %>

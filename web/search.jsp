@@ -35,6 +35,13 @@
                 <input type = "text" name = "search" placeholder = "Search..."/>
                 <select name="action" required>
                     <option value="title_search">Titles</option>
+                    <%
+                        if(user.isIs_admin()) {
+                    %>
+                    <option value="user_search">Users</option>
+                    <%
+                        }
+                    %>
                 </select>
             </form>
             <hr/>
@@ -47,6 +54,14 @@
             <%
                 }
             %>
+            <%
+                if(session.getAttribute("found_users") != null) {
+            %>
+                <jsp:include page="user_search_table.jsp" />
+            <%
+                }
+            %>
+            
             
         </section>
     </body>

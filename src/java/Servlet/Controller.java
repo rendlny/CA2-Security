@@ -7,13 +7,7 @@ package Servlet;
 
 import Commands.Command;
 import Commands.CommandFactory;
-import Commands.TitleCheckOutCommand;
-import Commands.TitleListCommand;
-import Commands.UserLoanCommand;
-import Commands.UserLoginCommand;
-import Commands.UserSignUpCommand;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

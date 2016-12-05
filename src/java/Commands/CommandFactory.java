@@ -31,6 +31,8 @@ public class CommandFactory {
             command = new UserForceUpdatePasswordCommand();
         } else if (action.equals("title_search")) {
             command = new TitleSearchCommand();
+        } else if (action.equals("user_search")) {
+            command = new UserSearchCommand();
         } else if(action.equals("return_title")){
             command = new TitleReturnCommand();
         }

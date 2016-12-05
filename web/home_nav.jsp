@@ -11,7 +11,6 @@
 <div id="bar">
     <nav>
         <ul>
-            <a href='home.jsp'><li>Home</li></a>
             <a href='user_loans.jsp'><li>My Loans</li></a>
             <a href='search.jsp'><li>Search</li></a>
             <a class='right' href='logout.jsp'><li>Logout</li></a>

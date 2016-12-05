@@ -67,7 +67,7 @@ public class UserLoginCommand implements Command {
                                 + "of date, you must change it");
                         forwardToJsp = "force_password_change.jsp";
                     } else {
-                        forwardToJsp = "Controller?action=Home";
+                        forwardToJsp = "user_loans.jsp";
                     }
                 } else {
                     session.setAttribute("error", "No user with matching credentials. Please try again");
@@ -79,7 +79,7 @@ public class UserLoginCommand implements Command {
             }
         } else {
             session.setAttribute("error", "You are already logged in. Please log out first");
-            forwardToJsp = "home.jsp";
+            forwardToJsp = "user_loans.jsp";
         }
 
         return forwardToJsp;

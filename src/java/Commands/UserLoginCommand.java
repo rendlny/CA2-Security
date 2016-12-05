@@ -48,7 +48,7 @@ public class UserLoginCommand implements Command {
 
                     Calendar oldDate = Calendar.getInstance();
                     oldDate.set(Calendar.YEAR, year);
-                    oldDate.set(Calendar.MONTH, month);
+                    oldDate.set(Calendar.MONTH, month-1);
                     oldDate.set(Calendar.DAY_OF_MONTH, day);
                     Date theOldDate = oldDate.getTime();
 
@@ -57,6 +57,7 @@ public class UserLoginCommand implements Command {
 
                     long diff = theCurrDate.getTime() - theOldDate.getTime();
                     long days = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+                    
 
                     if (days > 90) {
                         session.setAttribute("username", temp_user.getUsername());

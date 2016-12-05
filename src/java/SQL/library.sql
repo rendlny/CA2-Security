@@ -140,6 +140,13 @@ ALTER TABLE `user`
 ALTER TABLE `permissions`
   ADD PRIMARY KEY (`role_type`, `permission`);
 
+  --
+-- Indexes for table `security_questions`
+--
+ALTER TABLE `security_questions`
+  ADD UNIQUE KEY `sq_id` (`sq_id`);
+
+  
 --
 -- AUTO_INCREMENT for dumped tables
 --
@@ -160,6 +167,11 @@ ALTER TABLE `title`
 ALTER TABLE `user`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
   
+-- AUTO_INCREMENT for table `security_questions`
+--
+ALTER TABLE `security_questions`
+  MODIFY `sq_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  
 --
 -- Constraints for dumped tables
 --
@@ -171,6 +183,25 @@ ALTER TABLE `loan`
   ADD CONSTRAINT `title_to_loan_fk` FOREIGN KEY (`title_id`) REFERENCES `title` (`title_id`),
   ADD CONSTRAINT `user_to_loan_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
 
+ --
+-- Dumping data for table `security_questions`
+--
+
+INSERT INTO `security_questions` (`sq_id`, `question`) VALUES
+(1, 'What is your mother''s maiden name?'),
+(2, 'What was your first pet''s name?'),
+(3, 'What is name of the street you grew up on?'),
+(4, 'What was the name of your best friend growing up?'),
+(5, 'When you were young, what did you want to be when you grew up?'),
+(6, 'What was the name of your elementary / primary school?'),
+(7, 'What is your oldest cousin''s first and last name?'),
+(8, 'What is the first name of the boy or girl that you first kissed?'),
+(9, 'Where were you when you had your first alcoholic drink?'),
+(10, 'Who was your childhood hero?'),
+(11, 'What was your childhood nickname?'),
+(12, 'What is the name of your grandmother''s dog?');
+ 
+  
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

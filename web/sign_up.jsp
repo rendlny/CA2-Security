@@ -32,7 +32,7 @@
                 <label for="email">Email:</label><br/>
                 <input id="email" class="text_input" type="email" name="email" placeholder="You@Awesome.com"  required/><br/>
 
-                <label for="pass">Password:</label><br/>
+                <label for="pass">Password: must contain a number, capital, lowercase <br/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; and special character</label><p></p><br/>
                 <input id="password" class="text_input" type="password" name="pass" placeholder="Password"  required/></br>
 
                 <label for="confirm_pass">Confirm Password:</label><br/>

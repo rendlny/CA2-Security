@@ -84,6 +84,28 @@ CREATE TABLE `permissions` (
 	`permission` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Security_Questions`
+--
+DROP TABLE IF EXISTS `security_questions`;
+CREATE TABLE `security_questions` (
+  `sq_id` int(11) NOT NULL,
+  `question` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `User_Questions`
+--
+DROP TABLE IF EXISTS `user_questions`;
+CREATE TABLE `user_questions` (
+  `sq_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `answer` varchar(64) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Indexes for dumped tables

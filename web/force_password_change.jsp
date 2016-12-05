@@ -29,7 +29,7 @@
 
             <input type = "hidden" name= "action" value = "force_update_password" />
 
-            <label for="old_pass">Password:</label><br/>
+            <label for="old_pass">Password: must contain a number, capital, lowercase <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; and special character</label><br/>
             <input class="text_input" type="password" name="old_pass" placeholder="Old password"/><br/>
             <input class="text_input" type="password" name="new_pass" placeholder="New password"/><br/>
             <input class="text_input" type="password" name="conf_pass" placeholder="Confirm password"/><br/>

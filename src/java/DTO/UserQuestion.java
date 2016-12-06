@@ -5,22 +5,31 @@
  */
 package DTO;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.KeySpec;
+import java.util.Base64;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
+
 /**
  *
  * @author Ren
  */
 public class UserQuestion {
+
     private int sq_id;
     private int user_id;
     private String answer;
-    
-    public UserQuestion(){
+
+    public UserQuestion() {
         sq_id = -1;
         user_id = -1;
         answer = null;
     }
-    
-    public UserQuestion(int sq_id, int user_id, String answer){
+
+    public UserQuestion(int sq_id, int user_id, String answer) {
         this.sq_id = sq_id;
         this.user_id = user_id;
         this.answer = answer;
@@ -83,4 +92,39 @@ public class UserQuestion {
     public String toString() {
         return "UserQuestion{" + "sq_id=" + sq_id + ", user_id=" + user_id + ", answer=" + answer + '}';
     }
+
+    public static String generateSalt() {
+
+        //Create SecureRandom and Base64Encoder objects
+        SecureRandom secRand = new SecureRandom();
+        Base64.Encoder enc = Base64.getEncoder();
+
+        //Create salt array to house the bytes
+        byte[] salt = new byte[32];
+
+        //Generate bytes
+        secRand.nextBytes(salt);
+
+        //Return salt as string
+        return enc.encodeToString(salt);
+    }
+
+    public static String generateSaltedHash(String password, String salt) {
+
+        Base64.Encoder enc = Base64.getEncoder();
+        byte[] hash = null;
+        KeySpec spec = new PBEKeySpec(password.toCharArray(),
+                salt.getBytes(), 65563, 256);
+        try {
+            SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA512");
+            hash = keyFactory.generateSecret(spec).getEncoded();
+        } catch (NoSuchAlgorithmException ex) {
+            System.out.println("No such algorithm found");
+        } catch (InvalidKeySpecException ex) {
+            System.out.println("Key spec chosen is invalid");
+        }
+
+        return enc.encodeToString(hash);
+    }
+
 }

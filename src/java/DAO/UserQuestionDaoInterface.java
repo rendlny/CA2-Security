@@ -5,6 +5,10 @@
  */
 package DAO;
 
+import DTO.SecurityQuestion;
+import DTO.UserQuestion;
+import java.util.ArrayList;
+
 /**
  *
  * @author Ren
@@ -14,4 +18,6 @@ public interface UserQuestionDaoInterface {
     public boolean addUserQuestionAnswer(int question_id, int user_id, String answer);
     public boolean removeUserQuestionAnswer(int question_id, int user_id);
     public boolean updateAnswerUserQuestionAnswer(int question_id, int user_id, String answer);
+    public int[] getUserQuestionsIds(int user_id);
+    public String[] getUserQuestionAnswers(int user_id);
 }

@@ -4,6 +4,9 @@
     Author     : Conno
 --%>
 
+<%@page import="DTO.SecurityQuestion"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="DAO.SecurityQuestionDao"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -16,12 +19,12 @@
         <section>
             <h1>Sign Up</h1>
             <hr/>
-            
+
             <jsp:include page="error.jsp"/>
-            
+
             <form method="post" action="Controller">
                 <input type="hidden" name="action" value="create_user"/>
-				
+
                 <label for="first_name">Name:</label><br/>
                 <input id="f_name" class="name_input" type="text" name="f_name" placeholder="First Name"  required/>
                 <input id="l_name" class="name_input" type="text" name="l_name" placeholder="Last Name"  required/><br/>
@@ -37,6 +40,48 @@
 
                 <label for="confirm_pass">Confirm Password:</label><br/>
                 <input id ="c_pass" class="text_input" type="password" name="confirm_pass" placeholder="Confirm Password"  required/><br/>
+                <br/><br/>
+                <h3>Security Questions:</h3>
+                <p>(Must select 3 different questions)</p><br/>
+                <label for="select1">Questions 1:</label><br/>
+                <select name="select1" id="select1" style="width:70%;">
+                    <%
+                        SecurityQuestionDao sqDao = new SecurityQuestionDao("library");
+                        ArrayList<SecurityQuestion> questions = sqDao.getAllSecurityQuestions();
+
+                        out.print(questions.size());
+
+                        if (questions != null && questions.size() > 0) {
+                            for (SecurityQuestion q : questions) {
+                    %>
+
+                    <option value="<%=q.getSq_id()%>"> <%=q.getQuestion()%> </option>
+
+                    <%      }
+                        } else {
+                            session.setAttribute("error", "ERROR GETTING SECURITYQUESTIONS FROM DATABASE");
+                        }
+                    %>
+                </select>
+                <input id="sQ1" class="text_input" type="password" name="securityQ1" placeholder="Answer" required/>
+                <br/><br/>
+                <label for="select1">Questions 2:</label><br/>
+                <select name="select2" id="select2" style="width:70%;">
+                    <% for (SecurityQuestion q : questions) {%>  
+
+                    <option value="<%=q.getSq_id()%>"> <%=q.getQuestion()%> </option>
+                    <% } %>
+                </select>
+                <input id="sQ2" class="text_input" type="password" name="securityQ2" placeholder="Answer" required/>
+                <br/><br/>
+                <label for="select1">Questions 3:</label><br/>
+                <select name="select3" id="select3" style="width:70%;">
+                    <% for (SecurityQuestion q : questions) {%>  
+
+                    <option value="<%=q.getSq_id()%>"> <%=q.getQuestion()%> </option>
+                    <% }%>
+                </select>
+                <input id="sQ3" class="text_input" type="password" name="securityQ3" placeholder="Answer" required/>
 
                 <br/><br/>
                 <input id="submit" class="button" type="submit" name="submit" value="Create Account"/>

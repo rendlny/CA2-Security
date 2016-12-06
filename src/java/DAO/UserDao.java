@@ -469,4 +469,129 @@ public class UserDao extends Dao implements UserDaoInterface {
 
         return updated;
     }
+
+    @Override
+    public int getUserId(String username, String email) {
+        int userId = -1;
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            con = getConnection();
+
+            String query = "SELECT user_id FROM user WHERE username = ? AND email = ?";
+            ps = con.prepareStatement(query);
+            ps.setString(1, username);
+            ps.setString(2, email);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                userId = rs.getInt("user_id");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Exception occured in the getUserId() method: " + e.getMessage());
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    freeConnection(con);
+                }
+            } catch (SQLException e) {
+                System.out.println("Exception occured in the finally section of the getUserId() method: " + e.getMessage());
+            }
+        }
+        return userId;
+    }
+
+    @Override
+    public boolean resetPassword(int user_id, String newPass, String date, String salt) {
+        boolean reset = false;
+
+        Connection con = null;
+        PreparedStatement ps = null;
+        int affectedRows = 0;
+        try {
+            con = getConnection();
+
+            String query = "UPDATE user SET pass = ?, salt = ?, last_password_change = ?  WHERE user_id = ?";
+            ps = con.prepareStatement(query);
+            ps.setString(1, newPass);
+            ps.setString(2, salt);
+            ps.setString(3, date);
+            ps.setInt(4, user_id);
+            affectedRows = ps.executeUpdate();
+
+            if (affectedRows != 0) {
+                reset = true;
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Exception occured in the resetPassword() method: " + e.getMessage());
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    freeConnection(con);
+                }
+            } catch (SQLException e) {
+                System.out.println("Exception occured in the finally section of the resetPassword() method: " + e.getMessage());
+            }
+        }
+        return reset;
+    }
+
+    @Override
+    public User getUserById(int user_id) {
+        User u = null;
+
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            con = getConnection();
+            String query = "SELECT * FROM user WHERE user_id = ?";
+            ps = con.prepareStatement(query);
+            ps.setInt(1, user_id);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+
+                u = new User(
+                        rs.getInt("user_id"),
+                        rs.getString("username"),
+                        rs.getString("email"),
+                        rs.getString("pass"),
+                        rs.getString("salt"),
+                        rs.getString("f_name"),
+                        rs.getString("l_name"),
+                        rs.getString("last_password_change"),
+                        rs.getBoolean("is_admin")
+                );
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Exception occured in the getUserById() method: " + e.getMessage());
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    freeConnection(con);
+                }
+            } catch (SQLException e) {
+                System.out.println("Exception occured in the finally section of the getUserById() method: " + e.getMessage());
+            }
+        }
+
+        return u;
+    }
 }

@@ -18,7 +18,7 @@
             <hr/>
 
             <jsp:include page="error.jsp"/>
-            
+            <jsp:include page="notify.jsp"/>  
             <form method="post" action="Controller">
 
                 <input type="hidden" name="action" value="login_user"/>
@@ -26,9 +26,9 @@
                 <label for="username">Username:</label><br/>
                 <input class="text_input" type="text" name="username" placeholder="Username" required/><br/>
 
-                <label for="pass">Password:</label></br>
+                <label for="pass">Password:</label><br/>
                 <input class="text_input" type="password" name="pass" placeholder="Password" required/></br>
-
+                <a href="forgot_password.jsp">Forgot Your Password?</a>
                 <br/><br/>
                 <input class="button" type="submit" name="submit" value="Login"/>
                 <input class="button" type="reset" name="reset" value="Clear"/>

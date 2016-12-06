@@ -35,6 +35,12 @@ public class CommandFactory {
             command = new UserSearchCommand();
         } else if(action.equals("return_title")){
             command = new TitleReturnCommand();
+        }else if(action.equals("get_users_sq")){
+            command = new SecurityQuestionsForUserCommand();
+        }else if(action.equals("check_security_answers")){
+            command = new SecurityQuestionAnswersCheck();
+        }else if(action.equals("reset_forgotten_password")){
+            command = new UserResetForgottenPasswordCommand();
         }
         return command;
     }

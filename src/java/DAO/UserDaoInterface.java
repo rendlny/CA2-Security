@@ -20,4 +20,7 @@ public interface UserDaoInterface {
     public ArrayList<User> searchUsersLike(String name);
     public boolean updatePassword(String username, String oldPass, String newPass, String salt, String date);
     public boolean updateEmail(String username, String newEmail);
+    public int getUserId(String username, String email);
+    public boolean resetPassword(int user_id, String newPass, String date, String salt);
+    public User getUserById(int user_id);
 }

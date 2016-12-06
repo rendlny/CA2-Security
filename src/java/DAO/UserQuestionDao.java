@@ -5,10 +5,12 @@
  */
 package DAO;
 
+import DTO.SecurityQuestion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -136,23 +138,23 @@ public class UserQuestionDao extends Dao implements UserQuestionDaoInterface {
         boolean updated = false;
         Connection con = null;
         PreparedStatement ps = null;
-        try{
+        try {
             con = getConnection();
-            
+
             String query = "UPDATE user_questions SET answer = ? WHERE sq_id = ? and user_id = ?";
             ps = con.prepareStatement(query);
             ps.setString(1, answer);
             ps.setInt(1, question_id);
             ps.setInt(1, user_id);
-            
-            int rows = ps.executeUpdate(); 
-            
-            if(rows>0){
+
+            int rows = ps.executeUpdate();
+
+            if (rows > 0) {
                 updated = true;
             }
-        }catch(SQLException e){
-             System.out.println("Exception occured in the updateUserQuestionAnswer() method: " + e.getMessage());
-        }finally {
+        } catch (SQLException e) {
+            System.out.println("Exception occured in the updateUserQuestionAnswer() method: " + e.getMessage());
+        } finally {
             try {
                 if (ps != null) {
                     ps.close();
@@ -165,6 +167,98 @@ public class UserQuestionDao extends Dao implements UserQuestionDaoInterface {
             }
         }
         return updated;
+    }
+
+    @Override
+    public int[] getUserQuestionsIds(int user_id) {
+        int[] question_ids = null;
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            con = getConnection();
+            String query = "SELECT sq_id FROM user_questions WHERE user_id = ?";
+
+            ps = con.prepareStatement(query);
+            ps.setInt(1, user_id);
+            rs = ps.executeQuery();
+
+            question_ids = new int[3];
+
+            int i = 0;
+            while (rs.next()) {
+                question_ids[i] = rs.getInt("sq_id");
+                i++;
+            }
+
+        } catch (SQLException ex) {
+            System.out.println("Exception occured in the finally section of"
+                    + " the getUserQuestionsIds() method: " + ex.getMessage());
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    freeConnection(con);
+                }
+            } catch (SQLException e) {
+                System.out.println("Exception occured in the finally section of"
+                        + " the getUserQuestionsIds() method: " + e.getMessage());
+            }
+        }
+
+        return question_ids;
+    }
+
+    @Override
+    public String[] getUserQuestionAnswers(int user_id) {
+        String[] question_answers = null;
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            con = getConnection();
+            String query = "SELECT answer FROM user_questions WHERE user_id = ?";
+
+            ps = con.prepareStatement(query);
+            ps.setInt(1, user_id);
+            rs = ps.executeQuery();
+
+            question_answers = new String[3];
+
+            int i = 0;
+            while (rs.next()) {
+                question_answers[i] = rs.getString("answer");
+                i++;
+            }
+
+        } catch (SQLException ex) {
+            System.out.println("Exception occured in the finally section of"
+                    + " the getUserQuestionAnswers() method: " + ex.getMessage());
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    freeConnection(con);
+                }
+            } catch (SQLException e) {
+                System.out.println("Exception occured in the finally section of"
+                        + " the getUserQuestionAnswers() method: " + e.getMessage());
+            }
+        }
+
+        return question_answers;
     }
 
 }

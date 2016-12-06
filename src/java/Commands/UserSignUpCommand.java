@@ -52,10 +52,7 @@ public class UserSignUpCommand implements Command {
                     && (sQ2Answer != null && !sQ2Answer.equals(""))
                     && (sQ3Answer != null && !sQ3Answer.equals(""))) {
                 UserDao userDao = new UserDao("library");
-                String[] answers = new String[3];
-                answers[0]= sQ1Answer;
-                answers[1]= sQ2Answer;
-                answers[2]= sQ3Answer;
+                String[] answers = new String[]{sQ1Answer, sQ2Answer, sQ3Answer};
                 
                 if (userDao.checkUsername(username) && userDao.checkEmail(email)) {
                     User newUser = new User();
@@ -88,10 +85,7 @@ public class UserSignUpCommand implements Command {
                                     forwardToJsp = "sign_up.jsp";
                                 } else {
                                     
-                                    int[] ids = new int[3];
-                                    ids[0] = sQ1Id;
-                                    ids[1] = sQ2Id;
-                                    ids[2] = sQ3Id;
+                                    int[] ids = new int[]{sQ1Id, sQ2Id, sQ3Id};
                                     boolean check = false;
 
                                     do {

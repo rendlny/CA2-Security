@@ -104,7 +104,8 @@ DROP TABLE IF EXISTS `user_questions`;
 CREATE TABLE `user_questions` (
   `sq_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `answer` varchar(64) NOT NULL
+  `answer` varchar(64) NOT NULL,
+  `salt` varchar(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --

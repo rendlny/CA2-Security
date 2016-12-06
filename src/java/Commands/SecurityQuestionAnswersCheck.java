@@ -6,6 +6,8 @@
 package Commands;
 
 import DAO.UserQuestionDao;
+import DTO.UserQuestion;
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -24,6 +26,7 @@ public class SecurityQuestionAnswersCheck implements Command {
             String answer1 = request.getParameter("sq1");
             String answer2 = request.getParameter("sq2");
             String answer3 = request.getParameter("sq3");
+            String[] answerTry = new String[]{answer1, answer2, answer3};
 
             if (!answer1.equals("") && !answer2.equals("") && !answer3.equals("")) {
                 int correctAnswers = 0;
@@ -31,15 +34,16 @@ public class SecurityQuestionAnswersCheck implements Command {
                 int user_id = Integer.parseInt("" + session.getAttribute("user_id"));
                 if (user_id > 0) {
                     session.setAttribute("user_id", user_id);
-                    String[] answers = userQDao.getUserQuestionAnswers(user_id);
-                    if (answer1.equals(answers[0])) {
-                        correctAnswers++;
-                    }
-                    if (answer2.equals(answers[1])) {
-                        correctAnswers++;
-                    }
-                    if (answer3.equals(answers[2])) {
-                        correctAnswers++;
+                    ArrayList<UserQuestion> userQuestions = userQDao.getUserQuestionByUserId(user_id);
+                    
+                    String saltedTry = null;
+                    int i  = 0;
+                    for(UserQuestion q : userQuestions){
+                        saltedTry = UserQuestion.generateSaltedHash(answerTry[i], q.getSalt());
+                        if (saltedTry.equals(q.getAnswer())) {
+                            correctAnswers++;
+                        }
+                        i++;
                     }
                     if (correctAnswers >= 2) {
                         forwardToJsp = "reset_forgotten_password.jsp";

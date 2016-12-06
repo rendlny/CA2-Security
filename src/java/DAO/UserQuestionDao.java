@@ -6,6 +6,7 @@
 package DAO;
 
 import DTO.SecurityQuestion;
+import DTO.UserQuestion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -60,7 +61,7 @@ public class UserQuestionDao extends Dao implements UserQuestionDaoInterface {
     }
 
     @Override
-    public boolean addUserQuestionAnswer(int question_id, int user_id, String answer) {
+    public boolean addUserQuestionAnswer(int question_id, int user_id, String answer, String salt) {
         boolean added = false;
         Connection con = null;
         PreparedStatement ps = null;
@@ -68,11 +69,12 @@ public class UserQuestionDao extends Dao implements UserQuestionDaoInterface {
         try {
             con = getConnection();
 
-            String query = "INSERT INTO user_questions(sq_id, user_id, answer) VALUES(?, ?, ?)";
+            String query = "INSERT INTO user_questions(sq_id, user_id, answer, salt) VALUES(?, ?, ?, ?)";
             ps = con.prepareStatement(query);
             ps.setInt(1, question_id);
             ps.setInt(2, user_id);
             ps.setString(3, answer);
+            ps.setString(4, salt);
 
             int rows = ps.executeUpdate();
             if (rows > 0) {
@@ -259,6 +261,57 @@ public class UserQuestionDao extends Dao implements UserQuestionDaoInterface {
         }
 
         return question_answers;
+    }
+
+    @Override
+    public ArrayList<UserQuestion> getUserQuestionByUserId(int user_id) {
+        ArrayList<UserQuestion> userQuestions = null;
+        UserQuestion q = null;
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            con = getConnection();
+
+            String query = "SELECT * FROM user_questions WHERE user_id = ?";
+
+            ps = con.prepareStatement(query);
+            ps.setInt(1, user_id);
+            rs = ps.executeQuery();
+
+            userQuestions = new ArrayList<>();
+            while (rs.next()) {
+                q = new UserQuestion(
+                        rs.getInt("sq_id"),
+                        rs.getInt("user_id"),
+                        rs.getString("answer"),
+                        rs.getString("salt")
+                );
+                userQuestions.add(q);
+            }
+
+        } catch (SQLException ex) {
+            System.out.println("Exception occured in the finally section of"
+                    + " the getUserQuestionByUserId() method: " + ex.getMessage());
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    freeConnection(con);
+                }
+            } catch (SQLException e) {
+                System.out.println("Exception occured in the finally section of"
+                        + " the getUserQuestionByUserId() method: " + e.getMessage());
+            }
+        }
+
+        return userQuestions;
     }
 
 }

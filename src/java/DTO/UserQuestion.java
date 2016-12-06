@@ -22,17 +22,20 @@ public class UserQuestion {
     private int sq_id;
     private int user_id;
     private String answer;
+    private String salt;
 
     public UserQuestion() {
         sq_id = -1;
         user_id = -1;
         answer = null;
+        salt = null;
     }
 
-    public UserQuestion(int sq_id, int user_id, String answer) {
+    public UserQuestion(int sq_id, int user_id, String answer, String salt) {
         this.sq_id = sq_id;
         this.user_id = user_id;
         this.answer = answer;
+        this.salt = salt;
     }
 
     public int getSq_id() {
@@ -57,6 +60,14 @@ public class UserQuestion {
 
     public void setAnswer(String answer) {
         this.answer = answer;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 
     @Override
@@ -90,7 +101,7 @@ public class UserQuestion {
 
     @Override
     public String toString() {
-        return "UserQuestion{" + "sq_id=" + sq_id + ", user_id=" + user_id + ", answer=" + answer + '}';
+        return "UserQuestion{" + "sq_id=" + sq_id + ", user_id=" + user_id + ", answer=" + answer + ", salt=" + salt + '}';
     }
 
     public static String generateSalt() {

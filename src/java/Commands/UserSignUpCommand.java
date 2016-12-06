@@ -52,7 +52,11 @@ public class UserSignUpCommand implements Command {
                     && (sQ2Answer != null && !sQ2Answer.equals(""))
                     && (sQ3Answer != null && !sQ3Answer.equals(""))) {
                 UserDao userDao = new UserDao("library");
-
+                String[] answers = new String[3];
+                answers[0]= sQ1Answer;
+                answers[1]= sQ2Answer;
+                answers[2]= sQ3Answer;
+                
                 if (userDao.checkUsername(username) && userDao.checkEmail(email)) {
                     User newUser = new User();
                     newUser.setF_name(f_name);
@@ -83,6 +87,11 @@ public class UserSignUpCommand implements Command {
                                     session.setAttribute("error", "Cannot use the same security question more than once");
                                     forwardToJsp = "sign_up.jsp";
                                 } else {
+                                    
+                                    int[] ids = new int[3];
+                                    ids[0] = sQ1Id;
+                                    ids[1] = sQ2Id;
+                                    ids[2] = sQ3Id;
                                     boolean check = false;
 
                                     do {
@@ -104,13 +113,34 @@ public class UserSignUpCommand implements Command {
                                     if (userDao.addUser(newUser)) {
 
                                         UserQuestionDao userQDao = new UserQuestionDao("library");
-                                        boolean added1 = userQDao.addUserQuestionAnswer(sQ1Id, userDao.getUserId(username, email), sQ1Answer);
-                                        boolean added2 = userQDao.addUserQuestionAnswer(sQ2Id, userDao.getUserId(username, email), sQ2Answer);
-                                        boolean added3 = userQDao.addUserQuestionAnswer(sQ3Id, userDao.getUserId(username, email), sQ3Answer);
-                                        if ((added1 == false) || (added2 == false) || (added3 == false)) {
+                                        String saltedAnswer = null;
+                                        String salt = null;
+                                        int addedCount = 0;
+                                        for (int i = 0; i < 3; i++) {
+                                            do {
+                                                check = false;
+
+                                                salt = User.generateSalt();
+
+                                                if (userDao.checkSalt(salt)) {
+                                                    newUser.setSalt(salt);
+                                                    saltedAnswer = (User.generateSaltedHash(answers[i], salt));
+                                                } else {
+                                                    check = true;
+                                                }
+
+                                            } while (check);
+                                            
+                                            boolean added = userQDao.addUserQuestionAnswer(ids[i], userDao.getUserId(username, email), saltedAnswer, salt);
+                                            if(added==true){
+                                                addedCount++;
+                                            }
+                                        }
+                                        if (addedCount<3) {
                                             session.setAttribute("error", "Failed to add your Security Questions, Contact Admin");
                                             forwardToJsp = "sign_up.jsp";
                                         } else {
+                                            session.setAttribute("notify", "Account successfully created");
                                             forwardToJsp = "login.jsp";
                                         }
                                     } else {

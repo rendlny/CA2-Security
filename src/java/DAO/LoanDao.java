@@ -6,7 +6,6 @@
 package DAO;
 
 import DTO.Loan;
-import DTO.Title;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,6 +18,10 @@ import java.util.ArrayList;
  */
 public class LoanDao extends Dao implements LoanDaoInterface {
     
+    /**
+     *Initialises a LoanDao to access the specified database name
+     * @param database
+     */
     public LoanDao(String database) {
         super(database);
     }
@@ -70,7 +73,7 @@ public class LoanDao extends Dao implements LoanDaoInterface {
 
     /**
      * Call when a book is being returned to update column returned in DB to be true
-     * @param l {@code Loan} Object used to update the loan and set it as returned
+     * @param loan_id {@code Loan} Object used to update the loan and set it as returned
      * @return boolean on whether the book was returned successfully
      */
     @Override

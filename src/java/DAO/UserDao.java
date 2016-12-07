@@ -394,6 +394,15 @@ public class UserDao extends Dao implements UserDaoInterface {
         return users;
     }
 
+    /**
+     *
+     * @param username
+     * @param oldPass
+     * @param newPass
+     * @param salt
+     * @param date
+     * @return
+     */
     @Override
     public boolean updatePassword(String username, String oldPass, String newPass, String salt, String date) {
         boolean updated = false;
@@ -434,6 +443,12 @@ public class UserDao extends Dao implements UserDaoInterface {
         return updated;
     }
 
+    /**
+     *
+     * @param username
+     * @param newEmail
+     * @return
+     */
     @Override
     public boolean updateEmail(String username, String newEmail) {
         boolean updated = false;
@@ -470,6 +485,12 @@ public class UserDao extends Dao implements UserDaoInterface {
         return updated;
     }
 
+    /**
+     *
+     * @param username
+     * @param email
+     * @return
+     */
     @Override
     public int getUserId(String username, String email) {
         int userId = -1;
@@ -506,6 +527,14 @@ public class UserDao extends Dao implements UserDaoInterface {
         return userId;
     }
 
+    /**
+     *
+     * @param user_id
+     * @param newPass
+     * @param date
+     * @param salt
+     * @return
+     */
     @Override
     public boolean resetPassword(int user_id, String newPass, String date, String salt) {
         boolean reset = false;
@@ -545,6 +574,11 @@ public class UserDao extends Dao implements UserDaoInterface {
         return reset;
     }
 
+    /**
+     *
+     * @param user_id
+     * @return
+     */
     @Override
     public User getUserById(int user_id) {
         User u = null;

@@ -27,7 +27,7 @@ public class AdminDao extends UserDao implements AdminDaoInterface{
     /**
      *
      * @param username will be used to find a user
-     * @return a boolean that will be true if the use is found and is set to admin
+     * @return a boolean that will be true if the user is found and is set to admin
      */
     @Override
     public boolean makeAdmin(String username){

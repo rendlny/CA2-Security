@@ -5,7 +5,6 @@
  */
 package DAO;
 
-import DTO.SecurityQuestion;
 import DTO.UserQuestion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,10 +18,20 @@ import java.util.ArrayList;
  */
 public class UserQuestionDao extends Dao implements UserQuestionDaoInterface {
 
+    /**
+     * Initialises a UserQuestionDao to access the specified database name
+     * @param database the name of the database to be accessed
+     */
     public UserQuestionDao(String database) {
         super(database);
     }
 
+    /**
+     *
+     * @param question_id used to find user question with this id
+     * @param user_id used to find user question with this user id
+     * @return a String which is the answer from the UserQuestion object that has both the user_id and question_id
+     */
     @Override
     public String getUserQuestionAnswer(int question_id, int user_id) {
         String answer = null;
@@ -60,6 +69,14 @@ public class UserQuestionDao extends Dao implements UserQuestionDaoInterface {
         return answer;
     }
 
+    /**
+     *
+     * @param question_id id of the UserQuestion
+     * @param user_id id of the user whom this UserQuestion belongs to
+     * @param answer string which is the User answers to the question hashed with a unique salt
+     * @param salt String, the unique salt used to hash the user's answer
+     * @return a boolean of true if the Object is added to the db otherwise false
+     */
     @Override
     public boolean addUserQuestionAnswer(int question_id, int user_id, String answer, String salt) {
         boolean added = false;
@@ -99,6 +116,12 @@ public class UserQuestionDao extends Dao implements UserQuestionDaoInterface {
 
     }
 
+    /**
+     * removes a UserQuestion from the db if it finds a match that has both parameters
+     * @param question_id id of the question the user used
+     * @param user_id id of the user whom this question belongs to
+     * @return a boolean of true if the Object is removed from the db otherwise false
+     */
     @Override
     public boolean removeUserQuestionAnswer(int question_id, int user_id) {
         boolean removed = false;
@@ -135,6 +158,13 @@ public class UserQuestionDao extends Dao implements UserQuestionDaoInterface {
         return removed;
     }
 
+    /**
+     *
+     * @param question_id the new int that will replace the old question_id on the db
+     * @param user_id the new int that will replace the old user_id on the db
+     * @param answer the new string that will replace the old answer on the db
+     * @return a  boolean of true if the Object is updated on the db otherwise false
+     */
     @Override
     public boolean updateAnswerUserQuestionAnswer(int question_id, int user_id, String answer) {
         boolean updated = false;
@@ -171,6 +201,11 @@ public class UserQuestionDao extends Dao implements UserQuestionDaoInterface {
         return updated;
     }
 
+    /**
+     *
+     * @param user_id used to find the ids of the security questions the user used
+     * @return an array of int which are the ids for which security questions the user used
+     */
     @Override
     public int[] getUserQuestionsIds(int user_id) {
         int[] question_ids = null;
@@ -217,6 +252,11 @@ public class UserQuestionDao extends Dao implements UserQuestionDaoInterface {
         return question_ids;
     }
 
+    /**
+     *
+     * @param user_id to find the users answers on UserQuestions
+     * @return an array of strings which are the user's hashed answers
+     */
     @Override
     public String[] getUserQuestionAnswers(int user_id) {
         String[] question_answers = null;
@@ -263,6 +303,11 @@ public class UserQuestionDao extends Dao implements UserQuestionDaoInterface {
         return question_answers;
     }
 
+    /**
+     *
+     * @param user_id used to find all of a users USerQUestions
+     * @return an ArrayList of UserQuestions that have the user id given
+     */
     @Override
     public ArrayList<UserQuestion> getUserQuestionByUserId(int user_id) {
         ArrayList<UserQuestion> userQuestions = null;

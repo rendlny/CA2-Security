@@ -7,9 +7,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ *
+ * @author Friedrich
+ */
 public class PermissionDao extends Dao implements PermissionDaoInterface {
 
-	public PermissionDao(String database) {
+    /**
+     *
+     * @param database
+     */
+    public PermissionDao(String database) {
 		super(database);
 		// TODO Auto-generated constructor stub
 	}
@@ -20,6 +28,7 @@ public class PermissionDao extends Dao implements PermissionDaoInterface {
 	 * @param roleType
 	 *            of the User
 	 * @return {@code ArrayList} of {@code Permission}
+     * @throws java.sql.SQLException
 	 */
 	@Override
 	public ArrayList<Permission> getPermissionsByRoleType(int roleType) throws SQLException {
@@ -53,7 +62,13 @@ public class PermissionDao extends Dao implements PermissionDaoInterface {
 		return permissions;
 	}
 
-	@Override
+    /**
+     *
+     * @param permission
+     * @return
+     * @throws SQLException
+     */
+    @Override
 	public boolean addPermission(Permission permission) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -76,7 +91,13 @@ public class PermissionDao extends Dao implements PermissionDaoInterface {
 		return result == 1;
 	}
 
-	@Override
+    /**
+     *
+     * @param permission
+     * @return
+     * @throws SQLException
+     */
+    @Override
 	public boolean removePermission(Permission permission) throws SQLException {
 
 		Connection con = getConnection();

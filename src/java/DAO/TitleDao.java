@@ -14,6 +14,10 @@ import java.util.ArrayList;
  */
 public class TitleDao extends Dao implements TitleDaoInterface {
     
+    /**
+     * Initialises a TitleDao to access the specified database name
+     * @param database the name of the database to be accessed
+     */
     public TitleDao(String database) {
         super(database);
     }

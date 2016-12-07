@@ -176,8 +176,8 @@ public class UserQuestionDao extends Dao implements UserQuestionDaoInterface {
             String query = "UPDATE user_questions SET answer = ? WHERE sq_id = ? and user_id = ?";
             ps = con.prepareStatement(query);
             ps.setString(1, answer);
-            ps.setInt(1, question_id);
-            ps.setInt(1, user_id);
+            ps.setInt(2, question_id);
+            ps.setInt(3, user_id);
 
             int rows = ps.executeUpdate();
 
@@ -357,6 +357,45 @@ public class UserQuestionDao extends Dao implements UserQuestionDaoInterface {
         }
 
         return userQuestions;
+    }
+
+    @Override
+    public boolean checkSalt(String salt) {
+        boolean check = false;
+
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            con = getConnection();
+
+            String query = "Select * from user_questions WHERE salt = ?";
+            ps = con.prepareStatement(query);
+            ps.setString(1, salt);
+            rs = ps.executeQuery();
+
+            if (!rs.next()) {
+                check = true;
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Exception occured in the checkSalt() method: " + e.getMessage());
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    freeConnection(con);
+                }
+            } catch (SQLException e) {
+                System.out.println("Exception occured in the finally section of the checkSalt() method: " + e.getMessage());
+            }
+        }
+        return check;
     }
 
 }

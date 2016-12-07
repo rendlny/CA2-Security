@@ -84,7 +84,7 @@ public class SecurityQuestionDao extends Dao implements SecurityQuestionDaoInter
      * @return the question as a SecurityQuestion object
      */
     @Override
-    public SecurityQuestion getUsersSecurityQuestion(int id) {
+    public SecurityQuestion getUsersSecurityQuestion(int sq_id) {
         SecurityQuestion sq = null;
         Connection con = null;
         PreparedStatement ps = null;
@@ -96,7 +96,7 @@ public class SecurityQuestionDao extends Dao implements SecurityQuestionDaoInter
             String query = "SELECT * FROM security_questions WHERE sq_id = ?";
 
             ps = con.prepareStatement(query);
-            ps.setInt(1, id);
+            ps.setInt(1, sq_id);
 
             rs = ps.executeQuery();
 

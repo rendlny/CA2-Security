@@ -14,5 +14,5 @@ import java.util.ArrayList;
  */
 public interface SecurityQuestionDaoInterface {
     public ArrayList<SecurityQuestion> getAllSecurityQuestions();
-    public SecurityQuestion getUsersSecurityQuestion(int id);
+    public SecurityQuestion getUsersSecurityQuestion(int sq_id);
 }

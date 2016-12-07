@@ -8,6 +8,7 @@ package Commands;
 import DAO.UserDao;
 import DAO.UserQuestionDao;
 import DTO.User;
+import DTO.UserQuestion;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -114,11 +115,11 @@ public class UserSignUpCommand implements Command {
                                             do {
                                                 check = false;
 
-                                                salt = User.generateSalt();
+                                                salt = UserQuestion.generateSalt();
 
-                                                if (userDao.checkSalt(salt)) {
+                                                if (userQDao.checkSalt(salt)) {
                                                     newUser.setSalt(salt);
-                                                    saltedAnswer = (User.generateSaltedHash(answers[i], salt));
+                                                    saltedAnswer = (UserQuestion.generateSaltedHash(answers[i], salt));
                                                 } else {
                                                     check = true;
                                                 }

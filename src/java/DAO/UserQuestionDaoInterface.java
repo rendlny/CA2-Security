@@ -21,4 +21,5 @@ public interface UserQuestionDaoInterface {
     public int[] getUserQuestionsIds(int user_id);
     public String[] getUserQuestionAnswers(int user_id);
     public ArrayList<UserQuestion> getUserQuestionByUserId(int user_id);
+    public boolean checkSalt(String salt);
 }

@@ -41,6 +41,8 @@ public class CommandFactory {
             command = new SecurityQuestionAnswersCheck();
         }else if(action.equals("reset_forgotten_password")){
             command = new UserResetForgottenPasswordCommand();
+        }else if(action.equals("update_user_question")){
+            command = new UpdateUserQuestionAnswerCommand();
         }
         return command;
     }

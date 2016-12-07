@@ -1,6 +1,7 @@
 package Utils;
 
 import DAO.PermissionDao;
+import DAO.UserDao;
 import DTO.Permission;
 import DTO.User;
 import java.sql.SQLException;
@@ -25,7 +26,7 @@ public class SecurityUtils {
     /**
      * Returns a singleton of SecurityUtils.
      * 
-     * @return 
+     * @return - SecurityUtils
      */
     public static SecurityUtils getInstance() {
         if(instance==null) {
@@ -40,8 +41,8 @@ public class SecurityUtils {
      * @param user - the (Admin-)user trying to set a Permission
      * @param roleType - type of the Role for wich the new Permission is allowing somethig.
      * @param PermissionName - Name of the New Permission (must be unique).
-     * @throws SQLException
-     * @throws NotAuthorizedException 
+     * @throws SQLException - If something goes wrong at the DB.
+     * @throws NotAuthorizedException - if u are no Admin.
      */
     public void setPermission(User user, int roleType, String PermissionName) throws SQLException, NotAuthorizedException {
         if (user.isIs_admin()) {
@@ -62,18 +63,35 @@ public class SecurityUtils {
      * @throws SQLException 
      */
     public boolean hasPermission(User user, String PermissionName) throws SQLException {
-        
-        //convert is_Admin to int
-        int roleType = user.isIs_admin() ? 0 : 1;
-        
-        //Get Permissions for roleType from PermissionTable
-        ArrayList<Permission> permissions = permissionDao.getPermissionsByRoleType(roleType);
-        
-        //create new permission for user
-        Permission permission = new Permission(roleType, PermissionName);
-        
-        //validate Permission
-        if(permissions.contains(permission)) {
+        //check role first.
+        if (isActualRole(user)) {
+            //convert is_Admin to int
+            int roleType = user.isIs_admin() ? 0 : 1;
+
+            //Get Permissions for roleType from PermissionTable
+            ArrayList<Permission> permissions = permissionDao.getPermissionsByRoleType(roleType);
+
+            //create new permission for user
+            Permission permission = new Permission(roleType, PermissionName);
+
+            //validate Permission
+            if(permissions.contains(permission)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    /**
+     * Verify that the Users role didn't change.
+     * 
+     * @param user
+     * @return boolean
+     */
+    private boolean isActualRole(User user) {
+        UserDao udao = new UserDao("library");
+        User newUser = udao.getUserById(user.getUser_id());
+        if((user.isIs_admin()&&newUser.isIs_admin()) || (!user.isIs_admin()&&!newUser.isIs_admin())) {
             return true;
         }
         return false;

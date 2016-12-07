@@ -18,10 +18,18 @@ import java.util.ArrayList;
  */
 public class SecurityQuestionDao extends Dao implements SecurityQuestionDaoInterface {
 
+    /**
+     * Initialises a SecurityQuestionDao to access the specified database name
+     * @param database the name of the database to be accessed
+     */
     public SecurityQuestionDao(String database) {
         super(database);
     }
 
+    /**
+     * Gets all security questions from db
+     * @return an ArrayList of all security question objects
+     */
     @Override
     public ArrayList<SecurityQuestion> getAllSecurityQuestions() {
         ArrayList<SecurityQuestion> questions = new ArrayList<>();
@@ -70,6 +78,11 @@ public class SecurityQuestionDao extends Dao implements SecurityQuestionDaoInter
         return questions;
     }
 
+    /**
+     *
+     * @param id id of a specific security question, used to find that specific question
+     * @return the question as a SecurityQuestion object
+     */
     @Override
     public SecurityQuestion getUsersSecurityQuestion(int id) {
         SecurityQuestion sq = null;

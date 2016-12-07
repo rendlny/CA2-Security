@@ -18,10 +18,18 @@ public class Dao {
     
     private String database;
     
+    /**
+     * Initialises a Dao to access the specified database name
+     * @param database the name of the database to be accessed
+     */
     public Dao(String database) {
         this.database = database;
     }
     
+    /**
+     * Gets connections
+     * @return a connection object
+     */
     public Connection getConnection()
     {
 
@@ -43,6 +51,10 @@ public class Dao {
         return con;
     }
 
+    /**
+     * closes the connection to the databases
+     * @param con ia a Connection object
+     */
     public void freeConnection(Connection con)
     {
         try {

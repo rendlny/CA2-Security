@@ -47,9 +47,9 @@
                 <label for = "publisher" >Publisher:</label><br/>
                 <input type = "text" name = "publisher" placeholder = "Publisher" /><br/>
                 <label for = "year" >Year Released:</label><br/>
-                <input type = "text" name = "year" placeholder = "Year Released" /><br/>
+                <input type = "number" name = "year" placeholder = "Year Released" /><br/>
                 <label for = "stock" >Stock:</label><br/>
-                <input type = "text" name = "stock" placeholder = "Stock" /><br/><br/>
+                <input type = "number" name = "stock" placeholder = "Stock" /><br/><br/>
                 
                 <input id="submit" class="button" type="submit" name="submit" value="Create Account"/>
                 <input class="button" type="reset" name="clear" value="Clear"/>

@@ -45,8 +45,7 @@ public class CommandFactory {
         	// TODO Auto-generated constructor stub
             //command = new UpdateUserQuestionAnswerCommand();
         } else if (action.equals("add_title")) {
-        	// TODO Auto-generated constructor stub
-            //command = new CreateTitleCommand();
+            command = new CreateTitleCommand();
         }
         return command;
     }

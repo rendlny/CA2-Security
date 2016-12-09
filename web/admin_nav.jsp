@@ -13,7 +13,7 @@
         <ul>
             <a href='user_loans.jsp'><li>My Loans</li></a>
             <a href='search.jsp'><li>Search</li></a>            
-            <a href='search.jsp'><li>Add Title</li></a>
+            <a href='add_title.jsp'><li>Add Title</li></a>
             <a class='right' href='logout.jsp'><li>Logout</li></a>
             <a class='right' href='profile.jsp'><li><%=username%></li></a>
         </ul>

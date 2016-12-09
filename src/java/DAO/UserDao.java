@@ -108,7 +108,7 @@ public class UserDao extends Dao implements UserDaoInterface {
                             rs.getString("f_name"),
                             rs.getString("l_name"),
                             rs.getString("last_password_change"),
-                            rs.getBoolean("is_admin")
+                            rs.getString("role_type_name")
                     );
                 }
             }
@@ -311,7 +311,7 @@ public class UserDao extends Dao implements UserDaoInterface {
                         rs.getString("f_name"),
                         rs.getString("l_name"),
                         rs.getString("last_password_change"),
-                        rs.getBoolean("is_admin")
+                        rs.getString("role_type_name")
                 );
                 users.add(u);
             }
@@ -370,7 +370,7 @@ public class UserDao extends Dao implements UserDaoInterface {
                         rs.getString("f_name"),
                         rs.getString("l_name"),
                         rs.getString("last_password_change"),
-                        rs.getBoolean("is_admin")
+                        rs.getString("role_type_name")
                 );
                 users.add(u);
             }
@@ -604,7 +604,7 @@ public class UserDao extends Dao implements UserDaoInterface {
                         rs.getString("f_name"),
                         rs.getString("l_name"),
                         rs.getString("last_password_change"),
-                        rs.getBoolean("is_admin")
+                        rs.getString("role_type_name")
                 );
             }
 

@@ -23,7 +23,7 @@
         <%
             String nav_type = null;
             
-            if(user.isIs_admin()) {
+            if (user.getRole_type_name().equals("admin")) {
                 nav_type = "admin_nav.jsp";
             } else {
                 nav_type = "home_nav.jsp";
@@ -36,7 +36,7 @@
                 <select name="action" required>
                     <option value="title_search">Titles</option>
                     <%
-                        if(user.isIs_admin()) {
+                        if(user.getRole_type_name().equals("admin")) {
                     %>
                     <option value="user_search">Users</option>
                     <%

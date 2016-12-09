@@ -24,8 +24,8 @@
     <body>
         <%
             String nav_type = null;
-
-            if (user.isIs_admin()) {
+            
+            if (user.getRole_type_name().equals("admin")) {
                 nav_type = "admin_nav.jsp";
             } else {
                 nav_type = "home_nav.jsp";
@@ -57,7 +57,7 @@
                 <input class="button" type="submit" name="submit" value="Update Password" />
             </form>
             <br/>
-            <label>Security Questions:</label>
+            <h3>Security Questions:</h3>
             <%
                 UserQuestionDao userQDao = new UserQuestionDao("library");
                 ArrayList<UserQuestion> userQs = userQDao.getUserQuestionByUserId(user.getUser_id());

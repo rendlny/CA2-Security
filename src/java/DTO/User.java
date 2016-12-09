@@ -32,7 +32,7 @@ public class User {
     private String f_name;
     private String l_name;
     private String date;
-    private boolean is_admin;
+    private String role_type_name;
 
     public User() {
         user_id = -1;
@@ -43,11 +43,11 @@ public class User {
         f_name = null;
         l_name = null;
         date = null;
-        is_admin = false;
+        role_type_name = null;
     }
 
     public User(int user_id, String username, String email, String password,
-            String salt, String f_name, String l_name, String date, boolean is_admin) {
+            String salt, String f_name, String l_name, String date, String role_type_name) {
         this.user_id = user_id;
         this.username = username;
         this.email = email;
@@ -56,7 +56,7 @@ public class User {
         this.f_name = f_name;
         this.l_name = l_name;
         this.date = date;
-        this.is_admin = is_admin;
+        this.role_type_name = role_type_name;
     }
 
     public int getUser_id() {
@@ -119,12 +119,12 @@ public class User {
         this.date = date;
     }
 
-    public boolean isIs_admin() {
-        return is_admin;
+    public String getRole_type_name() {
+        return role_type_name;
     }
 
-    public void setIs_admin(boolean is_admin) {
-        this.is_admin = is_admin;
+    public void setRole_type_name(String role_type_name) {
+        this.role_type_name = role_type_name;
     }
 
     @Override
@@ -158,7 +158,7 @@ public class User {
                 + ", email=" + email + ", password=" + password
                 + ", salt=" + salt + ", f_name=" + f_name
                 + ", l_name=" + l_name + ", date=" + date
-                + ", is_admin=" + is_admin + '}';
+                + ", setRole_type_name=" + role_type_name + '}';
     }
 
     public static String generateSalt() {

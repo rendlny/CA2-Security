@@ -43,6 +43,8 @@ public class CommandFactory {
             command = new UserResetForgottenPasswordCommand();
         }else if(action.equals("update_user_question")){
             command = new UpdateUserQuestionAnswerCommand();
+        } else if (action.equals("add_title")) {
+            command = new CreateTitleCommand();
         }
         return command;
     }

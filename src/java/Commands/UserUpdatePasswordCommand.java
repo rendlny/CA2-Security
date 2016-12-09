@@ -88,7 +88,7 @@ public class UserUpdatePasswordCommand implements Command {
 
                         boolean updateCheck = userDao.updatePassword(username, oldPass, newSaltedPass, newSalt, date);
                         if (updateCheck == true) {
-                            session.setAttribute("notify", "Password Updated");
+                            session.setAttribute("notify", "<p>Password Updated</p>");
                             forwardToJsp = "profile.jsp";
                         } else {
                             session.setAttribute("error", "Password Update Failed");

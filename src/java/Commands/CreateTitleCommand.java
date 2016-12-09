@@ -45,7 +45,7 @@ public class CreateTitleCommand implements Command {
                 boolean added = titleDao.createTitle(title);
                 
                 if(added) {
-                    session.setAttribute("notify", "Book '" + book_title + "' added");
+                    session.setAttribute("<p>notify", "Book '" + book_title + "' added</p>");
                     forwardToJsp = "user_loans.jsp";
                 } else {
                     session.setAttribute("error", "A book already exists in the with that title");

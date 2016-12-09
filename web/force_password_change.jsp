@@ -22,7 +22,7 @@
         <jsp:include page="notify.jsp"/>
         <% if (user != null) {
                 session.setAttribute("error", "You cannot access that page");
-                response.sendRedirect("home.jsp");
+                response.sendRedirect("user_loans.jsp");
             } else {
         %>
         <form method="post" action="Controller">

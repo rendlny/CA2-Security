@@ -57,7 +57,7 @@ public class UserUpdateEmailCommand implements Command {
                                     + "email");
                             forwardToJsp = "profile.jsp";
                         } else {
-                            session.setAttribute("notify", "Email updated");
+                            session.setAttribute("notify", "<p>Email updated</p>");
                             logged_in.setEmail(newEmail);
                             session.setAttribute("logged_in", logged_in);
                             forwardToJsp = "profile.jsp";

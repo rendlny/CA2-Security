@@ -135,7 +135,7 @@ public class UserSignUpCommand implements Command {
                                             session.setAttribute("error", "Failed to add your Security Questions, Contact Admin");
                                             forwardToJsp = "sign_up.jsp";
                                         } else {
-                                            session.setAttribute("notify", "Account successfully created");
+                                            session.setAttribute("notify", "<p>Account successfully created</p>");
                                             forwardToJsp = "login.jsp";
                                         }
                                     } else {
@@ -157,7 +157,7 @@ public class UserSignUpCommand implements Command {
             }
         } else {
             session.setAttribute("error", "You are already logged in. Please log out first");
-            forwardToJsp = "home.jsp";
+            forwardToJsp = "user_loans.jsp";
         }
 
         return forwardToJsp;

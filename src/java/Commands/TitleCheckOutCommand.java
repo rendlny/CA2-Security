@@ -37,7 +37,7 @@ public class TitleCheckOutCommand implements Command {
                 title_id = Integer.parseInt(request.getParameter("title_id"));
             } catch (InputMismatchException ex) {
                 session.setAttribute("error", "An invalid title ID was detected. Please try again.");
-                forwardToJsp = "home.jsp";
+                forwardToJsp = "user_loans.jsp";
                 title_check = true;
             }
             
@@ -68,13 +68,13 @@ public class TitleCheckOutCommand implements Command {
                             forwardToJsp = "Controller?action=user_loans";
                         } else {
                             session.setAttribute("error", "An error occured when finalizing the loan. Please try again later");
-                            forwardToJsp = "home.jsp";
+                            forwardToJsp = "user_loans.jsp";
                         }
                         
                     } else {
                         session.setAttribute("error", "Apologies, it seems this book is out of stock. "
                             + "Please check again later");
-                        forwardToJsp = "home.jsp";
+                        forwardToJsp = "user_loans.jsp";
                     }
                 } else {
                     session.setAttribute("error", "You have already hit your limit on loans.\n"

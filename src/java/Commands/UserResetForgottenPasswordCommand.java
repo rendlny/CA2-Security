@@ -70,7 +70,7 @@ public class UserResetForgottenPasswordCommand implements Command {
                                 boolean reseted = userDao.resetPassword(user_id, saltedPass, date, salt);
 
                                 if (reseted == true) {
-                                    session.setAttribute("notify", "Password successfully changed");
+                                    session.setAttribute("notify", "<p>Password successfully changed</p>");
                                     forwardToJsp = "login.jsp";
                                 } else {
                                     session.setAttribute("error", "Failed to reset password, contact admin");
@@ -99,7 +99,7 @@ public class UserResetForgottenPasswordCommand implements Command {
             }
         } else {
             session.setAttribute("error", "You are already logged in. Please log out first");
-            forwardToJsp = "home.jsp";
+            forwardToJsp = "user_loans.jsp";
         }
 
         return forwardToJsp;

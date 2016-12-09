@@ -49,7 +49,7 @@ public class UpdateUserQuestionAnswerCommand implements Command {
 
                 boolean updated = userQDao.updateAnswerUserQuestionAnswer(q_id, user.getUser_id(), saltedAnswer);
                 if (updated == true) {
-                    session.setAttribute("notify", "Answer updated successfully");
+                    session.setAttribute("notify", "<p>Answer updated successfully</p>");
                     forwardToJsp = "profile.jsp";
                 } else {
                     session.setAttribute("error", "Failed to update answer, contact admin");

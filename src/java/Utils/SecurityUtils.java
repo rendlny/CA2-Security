@@ -13,7 +13,7 @@ import DTO.User;
  *
  */
 public class SecurityUtils {
-    PermissionDao permissionDao;
+    private static PermissionDao permissionDao;
     private static SecurityUtils instance;
     
     /**
@@ -44,7 +44,7 @@ public class SecurityUtils {
      * @throws SQLException - If something goes wrong at the DB.
      * @throws NotAuthorizedException - if u are no Admin.
      */
-    public void setPermission(User user, String roleType, String PermissionName) throws SQLException, NotAuthorizedException {
+    public static void setPermission(User user, String roleType, String PermissionName) throws SQLException, NotAuthorizedException {
         if (user.getRole_type_name().equals("admin")) {
             Permission permission = new Permission(roleType, PermissionName);
             permissionDao.addPermission(permission);
@@ -59,7 +59,7 @@ public class SecurityUtils {
      * @param user - DTO.User
      * @return - Subject
      */
-    public Subject getSubject(User user) {
+    public static Subject getSubject(User user) {
     	try {
 			return new Subject(user, permissionDao.getPermissionsByRoleType(user.getRole_type_name()));
 		} catch (SQLException e) {

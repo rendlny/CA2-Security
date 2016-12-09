@@ -42,9 +42,11 @@ public class CommandFactory {
         }else if(action.equals("reset_forgotten_password")){
             command = new UserResetForgottenPasswordCommand();
         }else if(action.equals("update_user_question")){
-            command = new UpdateUserQuestionAnswerCommand();
+        	// TODO Auto-generated constructor stub
+            //command = new UpdateUserQuestionAnswerCommand();
         } else if (action.equals("add_title")) {
-            command = new CreateTitleCommand();
+        	// TODO Auto-generated constructor stub
+            //command = new CreateTitleCommand();
         }
         return command;
     }

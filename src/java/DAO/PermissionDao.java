@@ -31,7 +31,7 @@ public class PermissionDao extends Dao implements PermissionDaoInterface {
      * @throws java.sql.SQLException
 	 */
 	@Override
-	public ArrayList<Permission> getPermissionsByRoleType(int roleType) throws SQLException {
+	public ArrayList<Permission> getPermissionsByRoleType(String roleType) throws SQLException {
 		Permission p;
 		ArrayList<Permission> permissions = new ArrayList<>();
 
@@ -45,7 +45,7 @@ public class PermissionDao extends Dao implements PermissionDaoInterface {
 		ps.setString(1, "" + roleType);
 		rs = ps.executeQuery();
 		while (rs.next()) {
-			p = new Permission(rs.getInt("role_type"), rs.getString("permission"));
+			p = new Permission(rs.getString("role_type"), rs.getString("permission"));
 			permissions.add(p);
 		}
 
@@ -76,7 +76,7 @@ public class PermissionDao extends Dao implements PermissionDaoInterface {
 		con = getConnection();
 		String query = "INSERT INTO permissions (role_type, permission) VALUES (?, ?)";
 		ps = con.prepareStatement(query);
-		ps.setInt(1, permission.getRoleType());
+		ps.setString(1, permission.getRoleType());
 		ps.setString(2, permission.getPermission());
 
 		int result = ps.executeUpdate();
@@ -104,7 +104,7 @@ public class PermissionDao extends Dao implements PermissionDaoInterface {
 		String query = "DELETE FROM permissions WHERE role_type = ? and permission = ?";
 		
 		PreparedStatement ps = con.prepareStatement(query);
-		ps.setInt(1, permission.getRoleType());
+		ps.setString(1, permission.getRoleType());
 		ps.setString(2, permission.getPermission());
 		int deletedRows = ps.executeUpdate();
 		

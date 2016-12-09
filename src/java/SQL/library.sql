@@ -43,10 +43,9 @@ CREATE TABLE `loan` (
 --
 -- Table structure for table `permissions`
 --
-
 DROP TABLE IF EXISTS `permissions`;
 CREATE TABLE `permissions` (
-  `role_type` tinyint(1) NOT NULL,
+  `role_type_name` varchar(20) NOT NULL,
   `permission` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -161,7 +160,7 @@ ALTER TABLE `loan`
 -- Indexes for table `permissions`
 --
 ALTER TABLE `permissions`
-  ADD PRIMARY KEY (`role_type`,`permission`);
+  ADD PRIMARY KEY (`role_type_name`,`permission`);
 
 --
 -- Indexes for table `security_questions`

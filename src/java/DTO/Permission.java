@@ -5,19 +5,19 @@ package DTO;
  *
  */
 public class Permission {
-	private int roleType; //maybe call it isAdmin()?
+	private String roleType; //maybe call it isAdmin()?
 	private String permission;
 	
-	public Permission(int roleType, String permission) {
+	public Permission(String roleType, String permission) {
 		this.roleType = roleType;
 		this.permission = permission;
 	}
 
-	public int getRoleType() {
+	public String getRoleType() {
 		return roleType;
 	}
 
-	public void setRoleType(int roleType) {
+	public void setRoleType(String roleType) {
 		this.roleType = roleType;
 	}
 
@@ -31,18 +31,6 @@ public class Permission {
 	
 	@Override
 	public String toString() {
-		String roleTypeName;
-		switch (this.roleType) {
-		case 0:
-			roleTypeName = "admin";
-			break;
-		case 1:
-			roleTypeName = "user";
-			break;
-		default:
-			roleTypeName = "user/admin";
-			break;
-		}
-		return roleTypeName + this.permission;
+		return this.roleType + " is allowed to " +  this.permission;
 	}
 }

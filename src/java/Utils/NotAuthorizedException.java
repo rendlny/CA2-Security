@@ -6,12 +6,18 @@
 package Utils;
 
 /**
- *
+ * Exception that is thrown when a user is not allowed to do a requested action!
+ * 
  * @author Friedrich
  */
 public class NotAuthorizedException extends Exception {
 
-    public NotAuthorizedException() {
+    /**
+	 * default serialVersionUID
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public NotAuthorizedException() {
         super();
     }
     

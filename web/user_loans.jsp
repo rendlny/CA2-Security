@@ -12,8 +12,13 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+    <%
+    if(session.getAttribute("logged_in")== null) {
+        session.setAttribute("error", "You must be logged in to access that page");
+        response.sendRedirect("login.jsp");
+    }else{
+%>
     <head>
-        <jsp:include page="logged_in_check.jsp"/>
         <jsp:include page = "head.jsp"/>
         <link href="css/home.css" rel="stylesheet" type="text/css">
         <%
@@ -91,4 +96,5 @@
             </form>
         </section>
     </body>
+    <% } %>
 </html>

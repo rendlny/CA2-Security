@@ -8,8 +8,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
-        <%
+    <%
             User user = null;
 
             if(session.getAttribute("logged_in")== null) {
@@ -17,8 +16,10 @@
                 response.sendRedirect("login.jsp");
             } else {
                 user = (User)session.getAttribute("logged_in");
-            }
+            
         %>
+    <head>
+        
         <jsp:include page="head.jsp"/>
         <link href="css/add_title.css" rel="stylesheet" type="text/css">
     </head>
@@ -56,4 +57,5 @@
             </form>
         </section>
     </body>
+    <% } %>
 </html>

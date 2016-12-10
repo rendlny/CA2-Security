@@ -14,7 +14,13 @@
         <link href="css/common.css" rel="stylesheet" type="text/css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%
-            User user = (User) session.getAttribute("logged_in");
+
+            if (session.getAttribute("logged_in") == null) {
+                session.setAttribute("error", "You must be logged in to access that page");
+                response.sendRedirect("login.jsp");
+            }else{
+        
+        User user = (User) session.getAttribute("logged_in");
         %>
     </head>
     <body>
@@ -35,6 +41,6 @@
             <input class="text_input" type="password" name="conf_pass" placeholder="Confirm password"/><br/>
             <input class="button" type="submit" name="submit" value="Update Password" />
         </form>
-        <% }%>
+        <% } }%>
     </body>
 </html>

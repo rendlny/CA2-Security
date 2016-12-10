@@ -37,7 +37,8 @@
                 </select>
             </form>
             <hr/>
-            
+            <jsp:include page="error.jsp"/>
+            <jsp:include page="notify.jsp"/>
             <%
                 String search_critera = request.getParameter("search");
                 

@@ -37,6 +37,7 @@ public class Subject {
 				return true;
 			}
 		}
+		//could also throw a not Authorized Exception here!
 		return false;
 	}
 	
@@ -51,5 +52,14 @@ public class Subject {
 			return true;
 		}
 		return false;
+	}
+	
+	/**
+	 * Method to get the Subjects Users role.
+	 * 
+	 * @return the Name of the User Roles
+	 */
+	public String getUserRole() {
+		return this.user.getRole_type_name();
 	}
 }

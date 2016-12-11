@@ -38,6 +38,24 @@ CREATE TABLE `loan` (
   `is_returned` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `loan`
+--
+
+INSERT INTO `loan` (`loan_id`, `title_id`, `user_id`, `withdraw_date`, `return_by_date`, `is_returned`) VALUES
+(10, 1, 1, '2016-10-09', '2016-10-16', 1),
+(11, 2, 1, '2016-10-16', '2016-10-23', 1),
+(12, 3, 1, '2016-10-23', '2016-10-30', 1),
+(13, 4, 1, '2016-10-30', '2016-11-06', 1),
+(14, 5, 1, '2016-11-06', '2016-11-13', 1),
+(15, 6, 1, '2016-11-13', '2016-11-20', 1),
+(16, 7, 1, '2016-11-20', '2016-12-27', 0),
+(17, 17, 2, '2016-11-06', '2016-11-13', 1),
+(18, 18, 2, '2016-11-13', '2016-11-20', 1),
+(19, 19, 2, '2016-11-20', '2016-12-27', 0),
+(20, 15, 3, '2016-11-06', '2016-11-13', 1),
+(21, 16, 3, '2016-11-13', '2016-11-20', 1),
+(22, 20, 3, '2016-11-20', '2016-12-27', 0);
 -- --------------------------------------------------------
 
 --
@@ -94,8 +112,37 @@ CREATE TABLE `title` (
   `year_published` int(4) NOT NULL,
   `stock` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+--
+-- Dumping data for table `title`
+--
+INSERT INTO `title` (`title_id`, `book_title`, `author`, `publisher`, `year_published`, `stock`) VALUES
+(1, 'Harry Potter and the Philosophers Stone', 'J.K.Rowling', 'Bloomsbury', 1997, 15),
+(2, 'Harry Potter and the Chamber of Secrets', 'J.K.Rowling', 'Bloomsbury', 1998, 13),
+(3, 'Harry Potter and the Prisoner of Azkaban', 'J.K.Rowling', 'Bloomsbury', 1999, 17),
+(4, 'Harry Potter and the Goblet of Fire', 'J.K.Rowling', 'Bloomsbury', 2000, 11),
+(5, 'Harry Potter and the Order of the Phoenix', 'J.K.Rowling', 'Bloomsbury', 2003, 12),
+(6, 'Harry Potter and the Half-Blood Prince', 'J.K.Rowling', 'Bloomsbury', 2005, 9),
+(7, 'Harry Potter and the Deathly Hallows', 'J.K.Rowling', 'Bloomsbury', 2007, 7),
+(8, 'To Kill a MockingBird', 'Harper Lee', 'J. B. Lippincott & Co.', 1960, 10),
+(9, 'The Hobbit', 'J. R. R. Tolkien', 'George Allen & Unwin', 1937, 5),
+(10, 'The Fellowship of the Ring', 'J. R. R. Tolkien', 'George Allen & Unwin', 1954, 3),
+(11, 'The Two Towers', 'J. R. R. Tolkien', 'George Allen & Unwin', 1954, 3),
+(12, 'The Return of the King', 'J. R. R. Tolkien', 'George Allen & Unwin', 1955, 3),
+(13, 'Computer Networking', 'James F. Kurose & Keith W. Ross', 'Pearson Education Limited', 2000, 1),
+(14, 'Gone with the wind', 'Margaret Mitchell', 'Macmillan Publishers', 1936, 15),
+(15, 'Shooting an Elephant', 'George Orwell', 'Klett', 2007, 4),
+(16, 'Animal Farm', 'George Orwell', 'Secker and Warburg', 1945, 4),
+(17, 'Fall of Giants', 'Ken Follett', 'Pan Macmillan', 2010, 4),
+(18, 'Winter of the World', 'Ken Follett', 'Dutton Penguin', 2012, 2),
+(19, 'Edge of Eternity', 'Ken Follett', 'Pan Macmillan', 2014, 2),
+(20, 'Northern Lights', 'Philip Pullman', 'Scholastic Point', 1995, 4);
+
 
 -- --------------------------------------------------------
+
+
+
+
 
 --
 -- Table structure for table `user`
@@ -119,8 +166,11 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `username`, `email`, `pass`, `salt`, `f_name`, `l_name`, `last_password_change`, `role_type_name`) VALUES
-(1, 'ConnorPakenham', 'connorpakenham@gmail.com', 'E0HzZ57e5KiIqkRBgx1spr3oQpAoPuaTSWRqRDzaSac=', 'JQTj41FV9a94cnbZWPWqydGrqMG77y9sWcCaB/F8tMo=', 'Connor', 'Pakenham', '2016-12-07', 'user');
-
+(1, 'ConnorPakenham', 'connorpakenham@gmail.com', 'E0HzZ57e5KiIqkRBgx1spr3oQpAoPuaTSWRqRDzaSac=', 'JQTj41FV9a94cnbZWPWqydGrqMG77y9sWcCaB/F8tMo=', 'Connor', 'Pakenham', '2016-12-12', 'admin');
+INSERT INTO `user` (`user_id`, `username`, `email`, `pass`, `salt`, `f_name`, `l_name`, `last_password_change`, `role_type_name`) VALUES
+(2, 'LaurenDelaney', 'ren.delaney@gmail.com', 'Wh3Lnk0vNE97bCMyU3U44CQ/qEAJKtl/cIl1L2Lk3VE=', 'iloizPrHLV+OUx8F42332QnFLxpAYAtwOv7TPdiKhMM=', 'Lauren', 'Delaney', '2016-12-12', 'user');
+INSERT INTO `user` (`user_id`, `username`, `email`, `pass`, `salt`, `f_name`, `l_name`, `last_password_change`, `role_type_name`) VALUES
+(3, 'fgreiner', 'greinerfriedrich@gmail.com', '7yAudW4R5cguCUdmB/S/nejwpDVNhAsJpur4bXH9OTk=', 'Unmis8bPRL8y98+5vlc6n5moCB+tOywHVTOkKDBa74I=', 'Friedrich', 'Greiner', '2016-12-12', 'user');
 -- --------------------------------------------------------
 
 --
@@ -141,8 +191,8 @@ CREATE TABLE `user_questions` (
 
 INSERT INTO `user_questions` (`sq_id`, `user_id`, `answer`, `salt`) VALUES
 (1, 1, 'aw2z5YNKyWoxJbHCXgI9nbbMJb79uN3YOKE06cLCKdU=', '28CO3jWTj4A+PhhCrsuE0G4GYJwcJy940rQ9ZtM1etU='),
-(2, 1, 'sFBy70wKZQZRo75XC3+PqtZmFEkFdRxNPTH2hPLsXsA=', 'wq9mRmjM9w+U2nTx11+CpH9uetHSGp+QSgsIUe+DepE='),
-(11, 1, '3Bo5K7swTPT+xqWU4B4YrHHQpzSU3HpX3U/c0+S1+2I=', '/OF85jUXAfGejqIlcO5U5Co2tFMn3qtyWiWRWZ0FgE8=');
+(2, 2, 'sFBy70wKZQZRo75XC3+PqtZmFEkFdRxNPTH2hPLsXsA=', 'wq9mRmjM9w+U2nTx11+CpH9uetHSGp+QSgsIUe+DepE='),
+(11, 3, '3Bo5K7swTPT+xqWU4B4YrHHQpzSU3HpX3U/c0+S1+2I=', '/OF85jUXAfGejqIlcO5U5Co2tFMn3qtyWiWRWZ0FgE8=');
 
 --
 -- Indexes for dumped tables

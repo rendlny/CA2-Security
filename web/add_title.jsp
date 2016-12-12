@@ -52,7 +52,7 @@
                 <label for = "stock" >Stock:</label><br/>
                 <input type = "number" name = "stock" placeholder = "Stock" /><br/><br/>
                 
-                <input id="submit" class="button" type="submit" name="submit" value="Create Account"/>
+                <input id="submit" class="button" type="submit" name="submit" value="Add Title"/>
                 <input class="button" type="reset" name="clear" value="Clear"/>
             </form>
         </section>

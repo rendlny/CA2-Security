@@ -51,7 +51,7 @@
                         ArrayList<Loan> loans = loanDao.listUserLoans(user.getUser_id());
 
                         if (loans.size() < 1) {
-                            out.print("You currently have no loans");
+                            out.print("<p>You currently have no loans</p>");
                         } else {
                     %>
 

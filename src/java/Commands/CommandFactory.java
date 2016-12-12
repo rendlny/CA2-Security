@@ -42,8 +42,7 @@ public class CommandFactory {
         }else if(action.equals("reset_forgotten_password")){
             command = new UserResetForgottenPasswordCommand();
         }else if(action.equals("update_user_question")){
-        	// TODO Auto-generated constructor stub
-            //command = new UpdateUserQuestionAnswerCommand();
+            command = new UpdateUserQuestionAnswerCommand();
         } else if (action.equals("add_title")) {
             command = new CreateTitleCommand();
         }

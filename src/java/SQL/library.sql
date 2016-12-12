@@ -166,11 +166,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `username`, `email`, `pass`, `salt`, `f_name`, `l_name`, `last_password_change`, `role_type_name`) VALUES
-(1, 'ConnorPakenham', 'connorpakenham@gmail.com', 'E0HzZ57e5KiIqkRBgx1spr3oQpAoPuaTSWRqRDzaSac=', 'JQTj41FV9a94cnbZWPWqydGrqMG77y9sWcCaB/F8tMo=', 'Connor', 'Pakenham', '2016-12-12', 'admin');
-INSERT INTO `user` (`user_id`, `username`, `email`, `pass`, `salt`, `f_name`, `l_name`, `last_password_change`, `role_type_name`) VALUES
-(2, 'LaurenDelaney', 'ren.delaney@gmail.com', 'Wh3Lnk0vNE97bCMyU3U44CQ/qEAJKtl/cIl1L2Lk3VE=', 'iloizPrHLV+OUx8F42332QnFLxpAYAtwOv7TPdiKhMM=', 'Lauren', 'Delaney', '2016-12-12', 'user');
-INSERT INTO `user` (`user_id`, `username`, `email`, `pass`, `salt`, `f_name`, `l_name`, `last_password_change`, `role_type_name`) VALUES
-(3, 'fgreiner', 'greinerfriedrich@gmail.com', '7yAudW4R5cguCUdmB/S/nejwpDVNhAsJpur4bXH9OTk=', 'Unmis8bPRL8y98+5vlc6n5moCB+tOywHVTOkKDBa74I=', 'Friedrich', 'Greiner', '2016-12-12', 'user');
+(1, 'ConnorPakenham', 'connorpakenham@gmail.com', 'n+MLXouduejG41KgXI9muVSXf0SBnFpbeIJ7100Yf4Y=', 'hChkjjJceS+Ca4z2MFGztT3p3GOrJ6kOJWOuNKc8DBA=', 'Connor', 'Pakenham', '2016-12-12', 'admin'),
+(2, 'LaurenDelaney', 'ren.delaney@gmail.com', 'Hl5IoGvX4zi0qHqRLOsPF84h1e1MlJ1dhO2Xoh7GjPA=', 'xu86tfrOHGcAAImUC3SppKjR/DNGiLiW7ScCiGmXe0U=', 'Lauren', 'Delaney', '2016-09-06', 'user'),
+(3, 'fgreiner', 'greinerfriedrich@gmail.com', 'nHneRqNVTVwGFET4sMNP5WmoPm08alJg+cbp8SXPGHQ=', 'GJdZhir/QKx+8hWwiBUr81cziupf7zl2u6BIOzfAYdI=', 'Friedrich', 'Greiner', '2016-12-12', 'user');
 -- --------------------------------------------------------
 
 --
@@ -190,9 +188,15 @@ CREATE TABLE `user_questions` (
 --
 
 INSERT INTO `user_questions` (`sq_id`, `user_id`, `answer`, `salt`) VALUES
-(1, 1, 'aw2z5YNKyWoxJbHCXgI9nbbMJb79uN3YOKE06cLCKdU=', '28CO3jWTj4A+PhhCrsuE0G4GYJwcJy940rQ9ZtM1etU='),
-(2, 2, 'sFBy70wKZQZRo75XC3+PqtZmFEkFdRxNPTH2hPLsXsA=', 'wq9mRmjM9w+U2nTx11+CpH9uetHSGp+QSgsIUe+DepE='),
-(11, 3, '3Bo5K7swTPT+xqWU4B4YrHHQpzSU3HpX3U/c0+S1+2I=', '/OF85jUXAfGejqIlcO5U5Co2tFMn3qtyWiWRWZ0FgE8=');
+(1, 1, '3IbUR1ai7q96nsMXs4yCK5hczxrwwcP+3F2wbht4i4E=', 'GOZyDjIjk1vCyXqA2sCqy7i2NzVs7PRTUqaD025Pius='),
+(2, 1, 'AZy01qWGOzLLIENaBXDMjdlHqNLZOZGEVUJATPzyuHI=', 'LWIRUbnFMg4Zvr2tT+tGr4V2P/4Ken6/77CnXkmSEvg='),
+(4, 1, 'TIVwdAHPEtiVHzubv7dw4nQDpLcTQNQ3mwWeklIGtT0=', 'Bf1cOlwNdg1urjJD/pRXG8YbeaZHLrbPzJeVi57SC4E='),
+(12, 2, 'lcEFNfsP9+1P2YAdRbjtMZZVpxz6EBdoCu433V+/cUY=', 'jbq0JSrUNnpTlBXQIRbB8IDHtNO00RblXyB2ZobnAVg='),
+(2, 2, 'WTmUG8KnP085ob7P5mlCdK7N9bEs+pc+f1hE+eeS3FE=', 'pjyr8IQY/BzJyE4UboiRZDQu2ogX8mXEHm9Ncjhr2+0='),
+(4, 2, 'W1ovUat9Dk0thQBAPIC42Bt/Twi01o7otKqfA5qRLLU=', 'sacwdhZHfrsmIJGccSNrP3goUce3EQexgPcuCiZSw+A='),
+(7, 3, 'CblGekYgqHlNDGJ9tSOzHda0VF7iZBJ/dEpGehiuPF4=', 'Zi+khP/eNHtHAxuOrY3yQZ7aJKPYzN/bvxEfFGBBuxA='),
+(3, 3, 'CGJajbjUUT/5UkRxbehWzXEZJnOvxVggyGSjljNl3DM=', 'x7KpgUMdVZSNvdEfZIRV9/sL6Asm36qsyBsaLTROFvI='),
+(2, 3, 'A0uAAvhsBbc4qDxGwYWCbGjQofmIc9HCU41j9Ryn3kM=', '2AgE3xq9qvFZprIsfA1BPYqtvgej1nOLZF75ejFfDG4=');
 
 --
 -- Indexes for dumped tables
